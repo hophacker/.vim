@@ -33,6 +33,7 @@ function! Repeat()
     let char  = input("Char: ")
     exe ":normal a" . repeat(char, times)
 endfunction
+
 inoremap <C-u> <C-o>:call Repeat()<cr>
 nnoremap <localleader>ac mzgg=G`z
 "---------------------------- omnicompletion BEGIN
@@ -69,6 +70,7 @@ set statusline=%f         " Path to the file
 set statusline+=\ -\      " Separator
 set statusline+=FileType: " Label
 set statusline+=%y        " Filetype of the file
+set statusline+=%{fugitive#statusline()} " which branch
 set statusline+=(%2v)%4l   " Current line
 "set statusline=%04l
 "set statusline=%-4l
