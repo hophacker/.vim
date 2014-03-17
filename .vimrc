@@ -1,10 +1,22 @@
-set tabpagemax=100
+se tabpagemax=100
 colorscheme desert
 let mapleader = ","
 let maplocalleader = "\\"
 syntax on
 
-map <leader>g :GundoToggle<CR>
+let g:pep8_map='<leader>8'
+"syntastic{{{
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=1
+"}}}
+
+"tab completion and documentation{{{
+au FileType python set omnifunc=pythoncomplete#Complete
+let g:SuperTabDefaultCompletionType = "context"
+set completeopt=menuone,longest,preview
+"}}}
+
+map <localleader>g :GundoToggle<CR>
 set tags=tags
 set guioptions-=T
 nnoremap Q <nop>
@@ -24,6 +36,7 @@ endfunction
 inoremap <C-u> <C-o>:call Repeat()<cr>
 nnoremap <localleader>ac mzgg=G`z
 "---------------------------- omnicompletion BEGIN
+filetype on
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 "---------------------------- omnicompletion END
