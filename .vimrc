@@ -1,4 +1,5 @@
-se tabpagemax=100
+"edited by Jie Feng
+set tabpagemax=100
 colorscheme desert
 let mapleader = ","
 let maplocalleader = "\\"
