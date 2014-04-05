@@ -1,12 +1,9 @@
 #include <cmath>
-#include <set>
 #include <list>
-#include <unordered_set>
 #include <climits>
 #include <queue>
 #include <vector>
 #include <map>
-#include <set>
 #include <cstdlib>
 #include <fstream>
 #include <iomanip>   
@@ -62,9 +59,7 @@ inline void pisz(int n) { printf("%d\n",n); }
 #define TESTS wez(testow)while(testow--)
 #define whileZ int T; getI(T); while(T--)
 #define printA(a,L,R) FE(i,L,R) cout << a[i] << (i==R?'\n':' ')
-#define printM(a,n,m) F(i,0,n){ F(j,0,m) cout << a[i][j] << ' '; cout << endl;}
-#define printV(a) printA(a,0,a.size()-1);
-#define printVV(a) F(i,0,a.size()) {F(j,0,a[i].size())cout << a[i][j] << ' '; cout << endl;}
+#define printV(a) printA(a,0,a.size()-1)
 #define MAXN 10000
 #define sz(a) int((a).size()) 
 #define pb push_back 
@@ -82,23 +77,25 @@ int gcd(int a,int b){return a?gcd(b%a,a):b;}
 ll gcd(ll a,ll b){return a?gcd(b%a,a):b;}
 ll powmod(ll a,ll p,ll m){ll r=1;while(p){if(p&1)r=r*a%m;p>>=1;a=a*a%m;}return r;}
 const int fx[4][2] = {{0,1}, {0,-1}, {1,0}, {-1,0}};
+int kmp_search(char* text, char* pat){
+    int patLen = strlen(pat);
+    vector<int> T(patLen+1);
+    T[0] = -1;
+    T[1] = 0;
+    for (int i = 1; i < patLen; i++){
+        int j = T[i];
+        while(j != -1 && pat[j] != pat[i]) j = T[j];
+        T[i+1] = j+1;
+    }
+    printA(T, 0, patLen);
+    for (int i = 0,j=0;text[i] != 0; i++){
+        while(j != -1 && text[i] != pat[j]) 
+            j = T[j];
+        j++;
+        if (j == patLen) return i-patLen+1;
+    }
+    return -1;
+}
 int main ( int argc, char *argv[] ) {
-    /*{
-    FILE* file = fopen(argv[1], "r");
-    int a, b;
-    while(fscanf(file, "%d,%d", &a, &b) != EOF){
-    }*/
-    /*
-    getI(T);
-    int T;
-    FE(cases,1,T){
-        printf("Cases #%d: ", cases);
-    }
-    }*/
-    /*
-    Solution s = Solution();
-     */
-    whileZ{
-    }
-    return EXIT_SUCCESS;
+    cout << kmp_search("abcabcabcc", "abcabcc") << endl;
 }
