@@ -2,6 +2,7 @@
 #include <set>
 #include <list>
 #include <unordered_set>
+#include <hash_map>
 #include <climits>
 #include <queue>
 #include <vector>
