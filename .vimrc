@@ -35,6 +35,9 @@ Plugin 'tpope/vim-git'
 Plugin 'Rip-Rip/clang_complete'
 Plugin 'xuhdev/SingleCompile'
 Plugin 'vim-scripts/taglist.vim'
+Plugin 'Hackerpilot/DCD'
+Plugin 'vim-perl/vim-perl'
+Plugin 'jcf/vim-latex'
 "Plugin 'vim-scripts/VimLite'
 
 " The sparkup vim script is in a subdirectory of this repo called vim.
