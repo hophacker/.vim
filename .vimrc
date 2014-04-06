@@ -27,12 +27,13 @@ Plugin 'marcweber/vim-addon-mw-utils'
 Plugin 'marcweber/vim-addon-manager'
 Plugin 'klen/python-mode'
 Plugin 'garbas/vim-snipmate'
-Plugin 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'garbas/vim-snipmate'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tpope/vim-git'
 Plugin 'Rip-Rip/clang_complete'
+Plugin 'xuhdev/SingleCompile'
 "Plugin 'vim-scripts/VimLite'
 
 " The sparkup vim script is in a subdirectory of this repo called vim.
@@ -166,7 +167,7 @@ let g:BASH_Company      = 'The Johns Hopkins'
 " clang_complete{{{
 let g:clang_library_path = "/usr/lib/llvm-3.4/lib/"
 let g:clang_library_file = "libclang.so.1"
-let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabContextDefaultCompletionType = '<c-x><c-u>'
 let g:clang_complete_auto = 1
 
