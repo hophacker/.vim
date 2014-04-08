@@ -88,6 +88,14 @@ set omnifunc=syntaxcomplete#Complete
 "shortcuts for searching patterns
 noremap ;; :%s:::g<Left><Left><Left>
 noremap ;' :%s:::cg<Left><Left><Left><Left>
+"plugins{{{
+"cvim{{{
+let s:C_CFlags         				= ' -g -O0 -c'      " C compiler flags: compile, don't optimize
+let s:C_LFlags         				= ' -g -O0'         " C compiler flags: link   , don't optimize
+let s:C_CplusCFlags         	= '-std=c++11 -g -O0 -c -Wno-deprecated'      " C++ compiler flags: compile, don't optimize
+let s:C_CplusLFlags         	= '-std=c++11 -g -O0 -Wno-deprecated'         " C++ compiler flags: link   , don't optimize
+"}}}
+"}}}
 "highlight errors {{{
 nnoremap <leader>w :match Error /\v +$/<cr>
 nnoremap <leader>W :match none<cr>k}}}
@@ -309,8 +317,11 @@ elseif has("win32")
 endif 
 "}}}
 " run and compile {{{
-nnoremap <F9> :SCCompile<cr>
-nnoremap <F10> :SCCompileRun<cr>
+"nnoremap <F9> :SCCompile<cr>
+"nnorema:C_CplusLFlags          = '-Wall -g -O0'         " C++ compiler flags:
+"link   , don't optimize
+"nnoremap <F10> :SCCompileRun<cr>
+nnoremap <F10> <F9><A-F9>
 "nnoremap <F12> :echo "!./" .  expand("%:r") . " < in"<cr>
 nnoremap <F12> :execute "!./" .  expand("%:r") . " < in"<cr>
 " }}}

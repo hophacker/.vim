@@ -140,12 +140,18 @@ else
 endif
 let s:C_VimCompilerName				= 'gcc'      " the compiler name used by :compiler
 "
-let s:C_CFlags         				= '-Wall -g -O0 -c'      " C compiler flags: compile, don't optimize
-let s:C_LFlags         				= '-Wall -g -O0'         " C compiler flags: link   , don't optimize
+"fengjie
+let s:C_CFlags         				= ' -g -O0 -c'      " C compiler flags: compile, don't optimize
+let s:C_LFlags         				= ' -g -O0'         " C compiler flags: link   , don't optimize
+"let s:C_CFlags         				= '-Wall -g -O0 -c'      " C compiler flags: compile, don't optimize
+"let s:C_LFlags         				= '-Wall -g -O0'         " C compiler flags: link   , don't optimize
 let s:C_Libs           				= '-lm'                  " C libraries to use
 "
-let s:C_CplusCFlags         	= '-Wall -g -O0 -c'      " C++ compiler flags: compile, don't optimize
-let s:C_CplusLFlags         	= '-Wall -g -O0'         " C++ compiler flags: link   , don't optimize
+"fengjie
+let s:C_CplusCFlags         	= '-std=c++11 -g -O0 -c -Wno-deprecated'      " C++ compiler flags: compile, don't optimize
+let s:C_CplusLFlags         	= '-std=c++11 -g -O0 -Wno-deprecated'         " C++ compiler flags: link   , don't optimize
+"let s:C_CplusCFlags         	= '-Wall -g -O0 -c'      " C++ compiler flags: compile, don't optimize
+"let s:C_CplusLFlags         	= '-Wall -g -O0'         " C++ compiler flags: link   , don't optimize
 let s:C_CplusLibs           	= '-lm'                  " C++ libraries to use
 "
 let s:C_CExtension     				= 'c'                    " C file extension; everything else is C++
