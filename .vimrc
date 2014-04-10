@@ -27,7 +27,7 @@ Plugin 'marcweber/vim-addon-mw-utils'
 Plugin 'marcweber/vim-addon-manager'
 Plugin 'klen/python-mode'
 Plugin 'garbas/vim-snipmate'
-"Plugin 'ervandew/supertab'
+Plugin 'ervandew/supertab'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'garbas/vim-snipmate'
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -38,7 +38,19 @@ Plugin 'vim-scripts/taglist.vim'
 Plugin 'Hackerpilot/DCD'
 Plugin 'vim-perl/vim-perl'
 Plugin 'jcf/vim-latex'
-"Plugin 'vim-scripts/VimLite'
+Plugin 'nvie/vim-flake8'
+Plugin 'nvie/vim-pyunit'
+Plugin 'scrooloose/syntastic'
+Plugin 'alfredodeza/pytest.vim'
+Plugin 'klen/rope-vim'
+Plugin 'vim-scripts/pydoc.vim'
+Plugin 'sjl/gundo.vim'
+
+"perl{{{
+Plugin 'mileszs/ack.vim'
+"}}}
+
+Plugin 'vim-scripts/VimLite'
 
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
@@ -101,6 +113,14 @@ let s:C_LFlags         				= ' -g -O0'         " C compiler flags: link   , don'
 let s:C_CplusCFlags         	= '-std=c++11 -g -O0 -c -Wno-deprecated'      " C++ compiler flags: compile, don't optimize
 let s:C_CplusLFlags         	= '-std=c++11 -g -O0 -Wno-deprecated'         " C++ compiler flags: link   , don't optimize
 "}}}
+"vim-flake8{{{
+autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
+let g:flake8_builtins="_,apply"
+let g:flake8_ignore="E501,W293"
+let g:flake8_max_line_length=99
+let g:flake8_max_complexity=10
+autocmd BufWritePost *.py call Flake8()
+"let g:flake8_cmd="/opt/strangebin/flake8000"
 "}}}
 "highlight errors {{{
 nnoremap <leader>w :match Error /\v +$/<cr>
