@@ -82,7 +82,7 @@ template<typename T> ostream& operator<<(ostream &s,vector<T> t){F(i,0,SZ(t))s<<
 int gcd(int a,int b){return a?gcd(b%a,a):b;}
 ll gcd(ll a,ll b){return a?gcd(b%a,a):b;}
 ll powmod(ll a,ll p,ll m){ll r=1;while(p){if(p&1)r=r*a%m;p>>=1;a=a*a%m;}return r;}
-const int fx[4][2] = {{0,1}, {0,-1}, {1,0}, {-1,0}};
+const int fx[4][2] = {{0,1}, {1,0}, {0,-1}, {-1,0}};
 int main ( int argc, char *argv[] ) {
     /*{
     FILE* file = fopen(argv[1], "r");
