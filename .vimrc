@@ -370,7 +370,7 @@ function! SpellCheck()
     endif
 endfunction
 
-noremap <localleader>sc :call SpellCheck()<cr>
+noremap <localleader>spc :call SpellCheck()<cr>
 nnoremap / /\v
 nnoremap <leader>/ :nohlsearch<cr>
 nnoremap <localleader>h :set hlsearch!<cr>

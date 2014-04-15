@@ -18,6 +18,4 @@
 #===============================================================================
 
 set -o nounset                              # Treat unset variables as an error
-cd bundle/
-git clone https://github.com/tpope/vim-surround
-
+git clone https://github.com/gmarik/Vundle.vim bundle/vundle
