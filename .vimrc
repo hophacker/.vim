@@ -98,6 +98,7 @@ inoremap <C-u> <C-o>:call Repeat()<cr>
 nnoremap <localleader>ia mzgg=G`z
 nnoremap <localleader>rf :e<cr>
 "---------------------------- omnicompletion BEGIN
+let b:pymode_modified=1
 syntax on
 filetype on
 filetype plugin on
@@ -288,6 +289,8 @@ augroup END
 "tex {{{
 augroup filetype_tex
     autocmd!
+    autocmd FileType tex nnoremap <F9> :SCCompile<cr>
+    autocmd FileType tex nnoremap <F10> :SCCompileRun<cr>
     autocmd FileType tex nnoremap <F7> :execute "set ft=text"<cr>
     autocmd FileType tex set textwidth=120
     autocmd FileType tex nnoremap <F6> :execute "!evince " . expand('%:r').".pdf &" <cr>
@@ -343,10 +346,10 @@ elseif has("win32")
 endif 
 "}}}
 " run and compile {{{
-"nnoremap <F9> :SCCompile<cr>
+" nnoremap <F9> :SCCompile<cr>
 "nnorema:C_CplusLFlags          = '-Wall -g -O0'         " C++ compiler flags:
 "link   , don't optimize
-"nnoremap <F10> :SCCompileRun<cr>
+" nnoremap <F10> :SCCompileRun<cr>
 nnoremap <F10> <F9><A-F9>
 "nnoremap <F12> :echo "!./" .  expand("%:r") . " < in"<cr>
 nnoremap <F12> :execute "!./" .  expand("%:r") . " < in"<cr>
