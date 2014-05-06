@@ -20,6 +20,7 @@
 using namespace std;
 #define bit(x,i) (x&(1<<i))
 #define lowbit(x) ((x)&((x)^((x)-1)))
+#define pow2(x) (1<<x)
 //#define max(a,b) (a<b?b:a)
 //#define abs(x) (x<0?-x:x)
 #define IN(i,l,r) (l<i&&i<r)
@@ -90,10 +91,9 @@ int main ( int argc, char *argv[] ) {
     while(fscanf(file, "%d,%d", &a, &b) != EOF){
     }*/
     /*
-    getI(T);
-    int T;
+    wez(T);
     FE(cases,1,T){
-        printf("Cases #%d: ", cases);
+        printf("Case #%d: ", cases);
     }
     }*/
     /*
