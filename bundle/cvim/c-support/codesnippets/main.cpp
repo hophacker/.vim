@@ -1,8 +1,8 @@
 #include <cmath>
 #include <set>
 #include <list>
-#include <unordered_set>
-#include <hash_map>
+//#include <unordered_set>
+//#include <hash_map>
 #include <climits>
 #include <queue>
 #include <vector>
@@ -56,6 +56,7 @@ using namespace std;
 #define ll long long
 #define fi first
 #define se second
+#define root(x) ((int)sqrt((double)x))
 #define wez(n) int (n); scanf("%d",&(n));
 #define wez2(n,m) int (n),(m); scanf("%d %d",&(n),&(m));
 #define wez3(n,m,k) int (n),(m),(k); scanf("%d %d %d",&(n),&(m),&(k));
@@ -64,15 +65,17 @@ inline void pisz(int n) { printf("%d\n",n); }
 #define whileZ int T; getI(T); while(T--)
 #define printA(a,L,R) FE(i,L,R) cout << a[i] << (i==R?'\n':' ')
 #define printM(a,n,m) F(i,0,n){ F(j,0,m) cout << a[i][j] << ' '; cout << endl;}
-#define printV(a) printA(a,0,a.size()-1);
+#define printV(a) printA(a,0,(int)a.size()-1);
 #define printVV(a) F(i,0,a.size()) {F(j,0,a[i].size())cout << a[i][j] << ' '; cout << endl;}
 #define MAXN 10000
 #define sz(a) int((a).size()) 
 #define pb push_back 
 #define all(c) (c).begin(),(c).end() 
-#define tr(c,i) for(typeof((c).begin() i = (c).begin(); i != (c).end(); i++) 
+#define tr(c,i) for(auto i = (c).begin(); i != (c).end(); i++) 
 #define present(c,x) ((c).find(x) != (c).end()) 
 #define cpresent(c,x) (find(all(c),x) != (c).end()) 
+#define tiny (double)1e-13
+#define close(x,y) (abs(x-y)<tiny)
 typedef int elem_t;
 typedef vector<int> vi; 
 typedef vector<vi> vvi; 
