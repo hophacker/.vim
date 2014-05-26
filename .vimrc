@@ -45,6 +45,7 @@ Plugin 'alfredodeza/pytest.vim'
 Plugin 'klen/rope-vim'
 Plugin 'vim-scripts/pydoc.vim'
 Plugin 'sjl/gundo.vim'
+Plugin 'vim-scripts/awk.vim'
 
 "perl{{{
 Plugin 'mileszs/ack.vim'
@@ -221,7 +222,7 @@ let g:clang_user_options=' -std=c++11 || exit 0'
 " option, 1 will select the first option for you, but won't insert it unless you
 " press enter. 2 will automatically insert what it thinks is right. 1 is the most
 " convenient IMO, and it defaults to 0.
-let g:clang_auto_select=1
+let g:clang_auto_select=2
 set conceallevel=2
 set concealcursor=vin
 let g:clang_snippets=1
