@@ -44,6 +44,7 @@ Plugin 'klen/rope-vim'
 Plugin 'vim-scripts/pydoc.vim'
 Plugin 'sjl/gundo.vim'
 Plugin 'vim-scripts/awk.vim'
+Plugin 'slim-template/vim-slim.git'
 
 "perl{{{
 Plugin 'mileszs/ack.vim'
@@ -268,6 +269,7 @@ augroup filetype_python
     autocmd!
     "autocmd FileType python set omnifunc=pythoncomplete#Complete
     autocmd FileType python setlocal foldmethod=indent
+    autocmd FileType python nnoremap <F12> :execute "!./" .  expand("%") <CR>
     autocmd FileType python setlocal foldlevel=99
     autocmd FileType python setlocal statusline=%f-%y-[%l]/[%L]
     autocmd FileType python nnoremap <buffer> <localleader>c I#cesc>
