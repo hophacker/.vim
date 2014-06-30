@@ -1,53 +1,16 @@
-/*
- * =====================================================================================
- *
- *       Filename:  maxRectangle.cpp
- *
- *    Description:  Largest Rectangle in a Histogram
- *
- *        Version:  1.0
- *        Created:  01/06/2014 04:28:52 PM
- *       Revision:  none
- *       Compiler:  gcc
- *
- *         Author:  Jie Feng (http://hey.i-feng.org/), jiefeng.hopkins@gmail.com
- *   Organization:  
- *
- * =====================================================================================
- */
-
-#include <stdio.h> 
-#define max(a,b) a > b ? a : b 
-#define N 100005 
-int q[N]={-1},w[N];     //w记录的是从这个点开始，之前有几个高度大于等于此高度. 
-int main() 
-{ 
-    int n,h; 
-    while(scanf("%d",&n),n) 
-    { 
-        int top = 0; 
-        __int64 ans = 0; 
-        for(int i=1;i<=n+1;i++) 
-        { 
-            if(i != n+1) 
-                scanf("%d",&h); 
-            else 
-                h = 0; 
-            if(h > q[top]) 
-                q[++top] = h , w[top] = 1; 
-            else 
-            { 
-                __int64 cnt = 0; 
-                while(h <= q[top]) 
-                { 
-                    ans = max(ans ,(cnt+w[top])*q[top] ); 
-                    cnt += w[top--]; 
-                } 
-                q[++top] = h; 
-                w[top] = cnt+1; 
-            } 
-        } 
-        printf("%I64d\n",ans); 
-    } 
-    return 0; 
-} 
+int largestRectangleArea(vector<int> &height) {
+    stack<int> pre;
+    int i = 0;
+    int max_area = 0;
+    height.push_back(-1);
+    while(i < height.size()){
+        if (pre.empty() || height[i] > height[pre.top()]){
+            pre.push(i++);
+        }else{
+            int h = height[pre.top()]; pre.pop();
+            max_area = max(max_area, h * (pre.empty()?i:i-pre.top()-1));
+        }
+    }
+    height.pop_back();
+    return max_area;
+}
