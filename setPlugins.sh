@@ -19,3 +19,4 @@
 
 set -o nounset                              # Treat unset variables as an error
 git clone https://github.com/gmarik/Vundle.vim bundle/vundle
+sudo pip install vim_bridge
