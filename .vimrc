@@ -45,6 +45,14 @@ Plugin 'vim-scripts/pydoc.vim'
 Plugin 'sjl/gundo.vim'
 Plugin 'vim-scripts/awk.vim'
 Plugin 'slim-template/vim-slim.git'
+Plugin 'moll/vim-node'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'vim-scripts/LargeFile'
+Plugin 'vim-scripts/cscope.vim'
+Plugin 'majutsushi/tagbar'
+
+"Plugin 'hallettj/jslint.vim'
 
 "perl{{{
 Plugin 'mileszs/ack.vim'
@@ -79,13 +87,20 @@ filetype plugin indent on     " required
 " NOTE: comments after Plugin commands are not allowed.
 " Put your stuff after this line
 "}}}
+"auto complete{{{
+highlight Pmenu ctermfg=blue
+highlight PmenuSel ctermfg=yellow 
+"ctermbg=<color>
+"}}}
 set tabpagemax=100
+set mouse=a
 colorscheme desert
 let mapleader = ","
 let maplocalleader = "\\"
 let g:pep8_map='<leader>8'
 map <localleader>g :GundoToggle<CR>
-set tags=tags
+set tags+=~/.vim/tags/boost
+set tags+=tags
 set guioptions-=T
 nnoremap Q <nop>
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
@@ -141,7 +156,7 @@ set hlsearch incsearch
 nmap <localleader>ev :tabedit $MYVIMRC<cr>'tzo
 nmap <localleader>em :tabedit makefile
 nnoremap <localleader>sv :source $MYVIMRC<cr>
-"execute 'set ft=' . &filetype<cr>
+nnoremap <localleader>ft :execute 'set ft=' . &filetype<cr>
 nnoremap <localleader>s% :source %<cr>
 "}}}
 "statusline--- {{{
@@ -262,6 +277,15 @@ augroup filetype_javascript
     autocmd!
     autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
     autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
+    autocmd FileType javascript nnoremap <F9> :execute "!node " .  expand("%")<cr>
+augroup END
+"}}}
+"ruby {{{
+augroup filetype_ruby
+    autocmd!
+    autocmd FileType ruby nnoremap <F9> :execute "!ruby " .  expand("%")<cr>
+    autocmd FileType ruby set tabstop=2
+    autocmd FileType ruby set shiftwidth=2
 augroup END
 "}}}
 "python {{{
@@ -358,6 +382,7 @@ nnoremap <F12> :execute "!./" .  expand("%:r") . " < in"<cr>
 "for taglist {{{
 
 nnoremap <silent> <F4> :TlistUpdate<CR> :TlistToggle<CR>
+nmap <F8> :TagbarToggle<CR>
 let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Auto_Open=0
 "}}}
