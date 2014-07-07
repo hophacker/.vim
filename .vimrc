@@ -48,6 +48,13 @@ Plugin 'sjl/gundo.vim'
 Plugin 'vim-scripts/awk.vim'
 Plugin 'slim-template/vim-slim.git'
 
+
+Plugin 'ack'
+Plugin 'potionBytecode'
+Plugin 'tasklist'
+Plugin 'vim'
+Plugin 'cvim'
+
 "perl{{{
 Plugin 'mileszs/ack.vim'
 "}}}
