@@ -54,6 +54,13 @@ Plugin 'majutsushi/tagbar'
 
 "Plugin 'hallettj/jslint.vim'
 
+
+Plugin 'ack'
+Plugin 'potionBytecode'
+Plugin 'tasklist'
+Plugin 'vim'
+Plugin 'cvim'
+
 "perl{{{
 Plugin 'mileszs/ack.vim'
 "}}}
