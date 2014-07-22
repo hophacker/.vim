@@ -16,37 +16,34 @@ Plugin 'gmarik/vundle'
 " The following are examples of different formats supported.
 " Keep Plugin commands between here and filetype plugin indent on.
 " scripts on GitHub repos
-Plugin 'tpope/vim-rails.git'
-Plugin 'tpope/vim-pathogen'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tomtom/tlib_vim.git'
-Plugin 'tomtom/tlib_vim'
-Plugin 'sirver/ultisnips'
-Plugin 'scrooloose/nerdtree'
-Plugin 'marcweber/vim-addon-mw-utils'
-Plugin 'marcweber/vim-addon-manager'
-Plugin 'klen/python-mode'
-Plugin 'garbas/vim-snipmate'
+Plugin 'alfredodeza/pytest.vim'
 Plugin 'ervandew/supertab'
-Plugin 'Lokaltog/vim-easymotion'
 Plugin 'garbas/vim-snipmate'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tpope/vim-git'
-Plugin 'Rip-Rip/clang_complete'
-Plugin 'xuhdev/SingleCompile'
-Plugin 'vim-scripts/taglist.vim'
 Plugin 'Hackerpilot/DCD'
-Plugin 'vim-perl/vim-perl'
 Plugin 'jcf/vim-latex'
+Plugin 'klen/python-mode'
+Plugin 'klen/rope-vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'marcweber/vim-addon-manager'
+Plugin 'marcweber/vim-addon-mw-utils'
 Plugin 'nvie/vim-flake8'
 Plugin 'nvie/vim-pyunit'
+Plugin 'Rip-Rip/clang_complete'
+Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'alfredodeza/pytest.vim'
-Plugin 'klen/rope-vim'
-Plugin 'vim-scripts/pydoc.vim'
+Plugin 'sirver/ultisnips'
 Plugin 'sjl/gundo.vim'
-Plugin 'vim-scripts/awk.vim'
 Plugin 'slim-template/vim-slim.git'
+Plugin 'tomtom/tlib_vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-git'
+Plugin 'tpope/vim-pathogen'
+Plugin 'tpope/vim-rails.git'
+Plugin 'vim-perl/vim-perl'
+Plugin 'vim-scripts/awk.vim'
+Plugin 'vim-scripts/pydoc.vim'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'xuhdev/SingleCompile'
 
 
 Plugin 'ack'
@@ -89,6 +86,7 @@ filetype plugin indent on     " required
 " Put your stuff after this line
 "}}}
 set tabpagemax=100
+set mouse=a
 colorscheme desert
 let mapleader = ","
 let maplocalleader = "\\"
@@ -116,6 +114,13 @@ set omnifunc=syntaxcomplete#Complete
 "shortcuts for searching patterns
 noremap ;; :%s:::g<Left><Left><Left>
 noremap ;' :%s:::cg<Left><Left><Left><Left>
+"edit .vimrc and refresh{{{
+nmap <localleader>ev :tabedit $MYVIMRC<cr>'tzo
+nmap <localleader>em :tabedit makefile
+nnoremap <localleader>sv :source $MYVIMRC<cr>
+nnoremap <localleader>ft :execute 'set ft=' . &filetype<cr>
+nnoremap <localleader>s% :source %<cr>
+"}}}
 "plugins{{{
 "cvim{{{
 let s:C_CFlags         				= ' -g -O0 -c'      " C compiler flags: compile, don't optimize
@@ -145,13 +150,6 @@ set smartindent
 set cindent
 set number
 set hlsearch incsearch
-"}}}
-"edit .vimrc and plugins{{{
-nmap <localleader>ev :tabedit $MYVIMRC<cr>'tzo
-nmap <localleader>em :tabedit makefile
-nnoremap <localleader>sv :source $MYVIMRC<cr>
-"execute 'set ft=' . &filetype<cr>
-nnoremap <localleader>s% :source %<cr>
 "}}}
 "statusline--- {{{
 "set statusline=%F          fullpath
@@ -283,6 +281,14 @@ augroup filetype_python
     autocmd FileType python setlocal statusline=%f-%y-[%l]/[%L]
     autocmd FileType python nnoremap <buffer> <localleader>c I#cesc>
     autocmd FileType python :iabbrev <buffer> iff if:<left>
+augroup END
+"}}}
+"ruby {{{
+augroup filetype_ruby
+    autocmd!
+    autocmd FileType ruby set sw=2
+    autocmd FileType ruby nnoremap <F9> :execute "!ruby ./" .  expand("%") <CR>
+    autocmd FileType ruby setlocal statusline=%f-%y-[%l]/[%L]
 augroup END
 "}}}
 "html {{{
