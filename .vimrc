@@ -72,7 +72,7 @@ nmap <F9> :SCCompile<cr>
 nmap <F10> :SCCompileRun<cr> 
 "}}}
 Plugin 'ack'
-Plugin 'potionBytecode'
+Plugin '~/.vim/bundle/potionBytecode/'
 "taskList{{{
 Plugin 'tasklist'
 map <localleader>td <Plug>TaskList
