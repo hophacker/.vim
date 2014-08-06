@@ -26,11 +26,29 @@ Plugin 'klen/rope-vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'marcweber/vim-addon-manager'
 Plugin 'marcweber/vim-addon-mw-utils'
+
+"nvie/vim-flake8{{{
 Plugin 'nvie/vim-flake8'
+autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
+let g:flake8_builtins="_,apply"
+let g:flake8_ignore="E501,W293"
+let g:flake8_max_line_length=99
+let g:flake8_max_complexity=10
+autocmd BufWritePost *.py call Flake8()
+"let g:flake8_cmd="/opt/strangebin/flake8000"
+"}}}
 Plugin 'nvie/vim-pyunit'
 Plugin 'Rip-Rip/clang_complete'
+"scrooloose/nerdtree{{{
 Plugin 'scrooloose/nerdtree'
+map <localleader>n :NERDTreeToggle<CR>
+"}}}
+"scrooloose/syntastic{{{
 Plugin 'scrooloose/syntastic'
+let g:syntastic_cpp_compiler_options = ' -std=c++11'
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=1
+"}}}
 Plugin 'sirver/ultisnips'
 Plugin 'sjl/gundo.vim'
 Plugin 'slim-template/vim-slim.git'
@@ -42,15 +60,31 @@ Plugin 'tpope/vim-rails.git'
 Plugin 'vim-perl/vim-perl'
 Plugin 'vim-scripts/awk.vim'
 Plugin 'vim-scripts/pydoc.vim'
+"taglist{{{
 Plugin 'vim-scripts/taglist.vim'
+nnoremap <silent> <F4> :TlistUpdate<CR> :TlistToggle<CR>
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Auto_Open=0
+"}}}
+"{{{xuhdev/SingleCompile
 Plugin 'xuhdev/SingleCompile'
-
-
+nmap <F9> :SCCompile<cr> 
+nmap <F10> :SCCompileRun<cr> 
+"}}}
 Plugin 'ack'
 Plugin 'potionBytecode'
+"taskList{{{
 Plugin 'tasklist'
+map <localleader>td <Plug>TaskList
+"}}}
 Plugin 'vim'
+"cvim{{{
 Plugin 'cvim'
+let s:C_CFlags         				= ' -g -O0 -c'      " C compiler flags: compile, don't optimize
+let s:C_LFlags         				= ' -g -O0'         " C compiler flags: link   , don't optimize
+let s:C_CplusCFlags         	= '-std=c++11 -g -O0 -c -Wno-deprecated'      " C++ compiler flags: compile, don't optimize
+let s:C_CplusLFlags         	= '-std=c++11 -g -O0 -Wno-deprecated'         " C++ compiler flags: link   , don't optimize
+"}}}
 
 "perl{{{
 Plugin 'mileszs/ack.vim'
@@ -94,16 +128,35 @@ let g:pep8_map='<leader>8'
 map <localleader>g :GundoToggle<CR>
 set tags=tags
 set guioptions-=T
+" run and compile {{{
+" nnoremap <F9> :SCCompile<cr>
+"nnorema:C_CplusLFlags          = '-Wall -g -O0'         " C++ compiler flags:
+"link   , don't optimize
+" nnoremap <F10> :SCCompileRun<cr>
+nnoremap <localleader>run :execute "!%"<CR>
+nnoremap <F12> :execute "!./" .  expand("%:r") . " < in"<cr>
+" }}}
 nnoremap Q <nop>
-let g:syntastic_cpp_compiler_options = ' -std=c++11'
+
+"functions{{{
 function! Repeat()
     let times = input("Count: ")
     let char  = input("Char: ")
     exe ":normal a" . repeat(char, times)
 endfunction
-inoremap <C-u> <C-o>:call Repeat()<cr>
+"}}}
+"localleader{{{
 nnoremap <localleader>ia mzgg=G`z
 nnoremap <localleader>rf :e<cr>
+"edit .vimrc and refresh{{{
+nmap <localleader>ev :tabedit $MYVIMRC<cr>'tzo
+nmap <localleader>em :tabedit makefile
+nnoremap <localleader>sv :source $MYVIMRC<cr>
+nnoremap <localleader>ft :execute 'set ft=' . &filetype<cr>
+nnoremap <localleader>s% :source %<cr>
+"}}}
+"}}}
+inoremap <C-u> <C-o>:call Repeat()<cr>
 "---------------------------- omnicompletion BEGIN
 let b:pymode_modified=1
 syntax on
@@ -114,29 +167,7 @@ set omnifunc=syntaxcomplete#Complete
 "shortcuts for searching patterns
 noremap ;; :%s:::g<Left><Left><Left>
 noremap ;' :%s:::cg<Left><Left><Left><Left>
-"edit .vimrc and refresh{{{
-nmap <localleader>ev :tabedit $MYVIMRC<cr>'tzo
-nmap <localleader>em :tabedit makefile
-nnoremap <localleader>sv :source $MYVIMRC<cr>
-nnoremap <localleader>ft :execute 'set ft=' . &filetype<cr>
-nnoremap <localleader>s% :source %<cr>
-"}}}
 "plugins{{{
-"cvim{{{
-let s:C_CFlags         				= ' -g -O0 -c'      " C compiler flags: compile, don't optimize
-let s:C_LFlags         				= ' -g -O0'         " C compiler flags: link   , don't optimize
-let s:C_CplusCFlags         	= '-std=c++11 -g -O0 -c -Wno-deprecated'      " C++ compiler flags: compile, don't optimize
-let s:C_CplusLFlags         	= '-std=c++11 -g -O0 -Wno-deprecated'         " C++ compiler flags: link   , don't optimize
-"}}}
-"vim-flake8{{{
-autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
-let g:flake8_builtins="_,apply"
-let g:flake8_ignore="E501,W293"
-let g:flake8_max_line_length=99
-let g:flake8_max_complexity=10
-autocmd BufWritePost *.py call Flake8()
-"let g:flake8_cmd="/opt/strangebin/flake8000"
-"}}}
 "highlight errors {{{
 nnoremap <leader>w :match Error /\v +$/<cr>
 nnoremap <leader>W :match none<cr>k}}}
@@ -271,6 +302,11 @@ augroup filetype_javascript
     autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
 augroup END
 "}}}
+"sh {{{
+augroup filetype_sh
+    autocmd!
+augroup END
+"}}}
 "python {{{
 augroup filetype_python
     autocmd!
@@ -305,6 +341,7 @@ augroup END
 "tex {{{
 augroup filetype_tex
     autocmd!
+    autocmd FileType tex nnoremap <localleader>cp :execute "!cp %:r.pdf  ~/Desktop/resume.pdf -f"<cr>
     autocmd FileType tex nnoremap <F9> :SCCompile<cr>
     autocmd FileType tex nnoremap <F10> :SCCompileRun<cr>
     autocmd FileType tex nnoremap <F7> :execute "set ft=text"<cr>
@@ -361,21 +398,6 @@ elseif has("win32")
     endif 
 endif 
 "}}}
-" run and compile {{{
-" nnoremap <F9> :SCCompile<cr>
-"nnorema:C_CplusLFlags          = '-Wall -g -O0'         " C++ compiler flags:
-"link   , don't optimize
-" nnoremap <F10> :SCCompileRun<cr>
-nnoremap <F10> <F9><A-F9>
-"nnoremap <F12> :echo "!./" .  expand("%:r") . " < in"<cr>
-nnoremap <F12> :execute "!./" .  expand("%:r") . " < in"<cr>
-" }}}
-"for taglist {{{
-
-nnoremap <silent> <F4> :TlistUpdate<CR> :TlistToggle<CR>
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Auto_Open=0
-"}}}
 "---------handy shortcuts--------------------{{{
 function! MouseAction(state)
     execute "!xinput set-prop 14 'Device Enabled' " . a:state 
@@ -416,16 +438,6 @@ nnoremap <C-left> gT
 nnoremap <C-right> gt
 inoremap <C-left> <esc>gT
 inoremap <C-right> <esc>gt
-"}}}
-"{{{
-map <localleader>n :NERDTreeToggle<CR>
-"}}}
-"TaskList{{{
-map <localleader>td <Plug>TaskList
-"}}}
-"syntastic{{{
-let g:syntastic_check_on_open=1
-let g:syntastic_enable_signs=1
 "}}}
 "tab completion and documentation{{{
 let g:SuperTabDefaultCompletionType = "context"
