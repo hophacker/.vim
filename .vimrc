@@ -71,25 +71,21 @@ Plugin 'xuhdev/SingleCompile'
 nmap <F9> :SCCompile<cr> 
 nmap <F10> :SCCompileRun<cr> 
 "}}}
-Plugin 'ack'
-Plugin '~/.vim/bundle/potionBytecode/'
 "taskList{{{
-Plugin 'tasklist'
+Plugin 'TaskList.vim'
 map <localleader>td <Plug>TaskList
 "}}}
-Plugin 'vim'
+Plugin 'vim-support'
 "cvim{{{
-Plugin 'cvim'
+Plugin 'git://github.com/hophacker/cvim'
 let s:C_CFlags         				= ' -g -O0 -c'      " C compiler flags: compile, don't optimize
 let s:C_LFlags         				= ' -g -O0'         " C compiler flags: link   , don't optimize
 let s:C_CplusCFlags         	= '-std=c++11 -g -O0 -c -Wno-deprecated'      " C++ compiler flags: compile, don't optimize
 let s:C_CplusLFlags         	= '-std=c++11 -g -O0 -Wno-deprecated'         " C++ compiler flags: link   , don't optimize
 "}}}
-
 "perl{{{
 Plugin 'mileszs/ack.vim'
 "}}}
-
 Plugin 'vim-scripts/VimLite'
 
 " The sparkup vim script is in a subdirectory of this repo called vim.
