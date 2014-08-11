@@ -27,6 +27,7 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'marcweber/vim-addon-manager'
 Plugin 'marcweber/vim-addon-mw-utils'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-haml'
 
 "nvie/vim-flake8{{{
 Plugin 'nvie/vim-flake8'
