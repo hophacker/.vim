@@ -1,4 +1,4 @@
-"edite by Jie Feng yes
+"edite by Jie Feng
 "vundle{{{
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -14,17 +14,22 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 Plugin 'ervandew/supertab'
 Plugin 'tomtom/tlib_vim' " This library provides some utility functions
-"{{{snipmate snippets
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
-let g:snipMate = {}
-let g:snipMate.scope_aliases = {}
-let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
-"}}}
 Plugin 'klen/rope-vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'marcweber/vim-addon-manager'
 Plugin 'marcweber/vim-addon-mw-utils'
+"{{{snipmate snippets
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+imap <C-J> <Plug>snipMateNextOrTrigger
+smap <C-J> <Plug>snipMateNextOrTrigger
+imap <C-K> <Plug>snipMateBack
+smap <C-K> <Plug>snipMateBack
+imap <C-L> <Plug>snipMateShow
+let g:snipMate = {}
+let g:snipMate.scope_aliases = {}
+let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
+"}}}
 "scrooloose/nerdtree{{{
 Plugin 'scrooloose/nerdtree'
 map <localleader>n :NERDTreeToggle<CR>
@@ -98,6 +103,16 @@ Plugin 'moll/vim-node'
 "o to open in new window
 "go to preview file (open but maintain focus on jshint results)
 "q to close the quickfix window
+"jslint{{{
+Plugin 'hallettj/jslint.vim'
+":JSLintUpdate
+":JSLintToggle
+"}}}
+augroup filetype_javascript
+    autocmd!
+    autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
+    autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
+augroup END
 "}}}
 "{{{c cpp D
 Plugin 'Hackerpilot/DCD'
@@ -349,18 +364,6 @@ augroup text
     autocmd FileType text nnoremap <F7> :set ft=tex<cr>
     autocmd FileType text onoremap <buffer> ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
     autocmd FileType text onoremap <buffer> ah :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rg_vk0"<cr>
-augroup END
-"}}}
-"javascript {{{
-"jslint{{{
-Plugin 'hallettj/jslint.vim'
-":JSLintUpdate
-":JSLintToggle
-"}}}
-augroup filetype_javascript
-    autocmd!
-    autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
-    autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
 augroup END
 "}}}
 "pathogen load"{{{
