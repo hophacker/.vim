@@ -18,4 +18,11 @@
 #===============================================================================
 
 set -o nounset                              # Treat unset variables as an error
-git clone https://github.com/gmarik/Vundle.vim bundle/vundle
+if [[ ! -e bundle/vundle ]] 
+then
+    git clone https://github.com/gmarik/Vundle.vim bundle/vundle
+fi
+
+#jslint(http://github.com/hallettj/jslint.vim)
+sudo apt-get install rhino
+sudo npm install -g jshint
