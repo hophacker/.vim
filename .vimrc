@@ -18,6 +18,7 @@ Plugin 'klen/rope-vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'marcweber/vim-addon-manager'
 Plugin 'marcweber/vim-addon-mw-utils'
+Plugin 'scrooloose/nerdcommenter'
 "{{{snipmate snippets
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
@@ -60,15 +61,17 @@ augroup END
 "{{{html haml slim
 Plugin 'slim-template/vim-slim.git'
 Plugin 'tpope/vim-haml'
+Plugin 'mattn/emmet-vim'
 augroup filetype_html
     autocmd!
+    "autocmd FileType html setlocal indentkeys-=*<Return>
     autocmd BufWritePre,BufRead *.html setlocal nowrap
     autocmd FileType html nnoremap <buffer> <localleader>c I<!--<esc>A--><esc>
     autocmd FileType html iabbrev <buffer> --- &mdash;
     autocmd FileType html iabbrev <buffer> `` &ldquo;
     autocmd FileType html iabbrev <buffer> '' &rdquo;
-    autocmd FileType html nnoremap <buffer> <localleader>f Vatzf
 augroup END
+let g:html_indent_inctags = "html,body,head,tbody"
 "}}}
 "{{{python
 Plugin 'vim-scripts/pydoc.vim'
@@ -224,13 +227,27 @@ augroup filetype_vim
 augroup END
 "}}}
 Plugin 'vim-scripts/VimLite'
+"{{{code beautify
+Plugin 'maksimr/vim-jsbeautify'
+Plugin 'einars/js-beautify'
+autocmd FileType javascript noremap <buffer>  <localleader>bb :call JsBeautify()<cr>
+autocmd FileType html noremap <buffer> <localleader>bb :call HtmlBeautify()<cr>
+autocmd FileType eruby noremap <buffer> <localleader>bb :call HtmlBeautify()<cr>
+autocmd FileType css noremap <buffer> <localleader>bb :call CSSBeautify()<cr>
+"}}}
 
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " scripts from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
+"{{{FuzzyFinder
 Plugin 'FuzzyFinder'
+nmap <localleader>f :FufFileWithCurrentBufferDir<CR>
+nmap <localleader>b :FufBuffer<CR>
+nmap <localleader>t :FufTaggedFile<CR>
+"}}}
+
 " scripts not on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
@@ -381,6 +398,13 @@ augroup vimrc_autocmds
     autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
     autocmd FileType python match Excess /\%80v.*/
     autocmd FileType python set nowrap
+augroup END
+
+"}}}
+"eruby {{{
+augroup eruby_autocmds
+    autocmd!
+    autocmd FileType eruby set foldmethod=indent
 augroup END
 
 "}}}
