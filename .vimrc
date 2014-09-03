@@ -1,7 +1,19 @@
-"edite by Jie Feng
+"edit by Jie Feng
 "vundle{{{
 set nocompatible              " be iMproved, required
 filetype off                  " required
+"edit file{{{
+nmap <localleader>ev :tabedit $MYVIMRC<cr>'tzo
+nmap <localleader>em :tabedit makefile
+nmap <localleader>ej :tabedit ~/.jslintrc<cr>'tzo
+"}}}
+"edit .vimrc and refresh{{{
+nnoremap <localleader>ia mzgg=G`z
+nnoremap <localleader>rf :e<cr>
+nnoremap <localleader>sv :source $MYVIMRC<cr>
+nnoremap <localleader>ft :execute 'set ft=' . &filetype<cr>
+nnoremap <localleader>s% :source %<cr>
+"}}}
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/vundle/
@@ -19,6 +31,15 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'marcweber/vim-addon-manager'
 Plugin 'marcweber/vim-addon-mw-utils'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'Raimondi/delimitMate'
+"{{{complete
+Plugin 'Valloric/YouCompleteMe'
+" These are the tweaks I apply to YCM's config, you don't need them but they might help.
+" YCM gives you popups and splits by default that some people might not like, so these should tidy it up a bit for you.
+let g:ycm_add_preview_to_completeopt=0
+let g:ycm_confirm_extra_conf=0
+set completeopt-=preview
+"}}}
 "{{{snipmate snippets
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
@@ -33,7 +54,7 @@ let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 "}}}
 "scrooloose/nerdtree{{{
 Plugin 'scrooloose/nerdtree'
-map <localleader>n :NERDTreeToggle<CR>
+map <localleader>nt :NERDTreeToggle<CR>
 "}}}
 "{{{latex tex
 Plugin 'jcf/vim-latex'
@@ -67,6 +88,7 @@ augroup filetype_html
     "autocmd FileType html setlocal indentkeys-=*<Return>
     autocmd BufWritePre,BufRead *.html setlocal nowrap
     autocmd FileType html nnoremap <buffer> <localleader>c I<!--<esc>A--><esc>
+    autocmd FileType html set sw=4
     autocmd FileType html iabbrev <buffer> --- &mdash;
     autocmd FileType html iabbrev <buffer> `` &ldquo;
     autocmd FileType html iabbrev <buffer> '' &rdquo;
@@ -100,13 +122,17 @@ autocmd BufWritePost *.py call Flake8()
 "let g:flake8_cmd="/opt/strangebin/flake8000"
 "}}}
 "{{{ javascript nodejs
-Plugin 'walm/jshint.vim'
+Plugin 'sleistner/vim-jshint'
+"Plugin 'walm/jshint.vim'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'jQuery'
 Plugin 'moll/vim-node'
 ":JSHint {file}
 "o to open in new window
 "go to preview file (open but maintain focus on jshint results)
 "q to close the quickfix window
 "jslint{{{
+"https://github.com/jshint/jshint/blob/master/examples/.jshintrc
 Plugin 'hallettj/jslint.vim'
 ":JSLintUpdate
 ":JSLintToggle
@@ -241,11 +267,24 @@ autocmd FileType css noremap <buffer> <localleader>bb :call CSSBeautify()<cr>
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " scripts from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
+"{{{ctrlp
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+Plugin 'kien/ctrlp.vim'
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+let g:ctrlp_user_command = 'find %s -type f'
+"}}}
 "{{{FuzzyFinder
-Plugin 'FuzzyFinder'
-nmap <localleader>f :FufFileWithCurrentBufferDir<CR>
-nmap <localleader>b :FufBuffer<CR>
-nmap <localleader>t :FufTaggedFile<CR>
+"Plugin 'FuzzyFinder'
+"nmap <localleader>f :FufFileWithCurrentBufferDir<CR>
+"nmap <localleader>b :FufBuffer<CR>
+"nmap <localleader>t :FufTaggedFile<CR>
 "}}}
 
 " scripts not on GitHub
@@ -267,6 +306,7 @@ let g:pep8_map='<leader>8'
 map <localleader>g :GundoToggle<CR>
 set tags=tags
 set guioptions-=T
+set autoread
 " run and compile {{{
 " nnoremap <F9> :SCCompile<cr>
 "nnorema:C_CplusLFlags          = '-Wall -g -O0'         " C++ compiler flags:
@@ -283,17 +323,6 @@ function! Repeat()
     let char  = input("Char: ")
     exe ":normal a" . repeat(char, times)
 endfunction
-"}}}
-"localleader{{{
-nnoremap <localleader>ia mzgg=G`z
-nnoremap <localleader>rf :e<cr>
-"edit .vimrc and refresh{{{
-nmap <localleader>ev :tabedit $MYVIMRC<cr>'tzo
-nmap <localleader>em :tabedit makefile
-nnoremap <localleader>sv :source $MYVIMRC<cr>
-nnoremap <localleader>ft :execute 'set ft=' . &filetype<cr>
-nnoremap <localleader>s% :source %<cr>
-"}}}
 "}}}
 inoremap <C-u> <C-o>:call Repeat()<cr>
 "---------------------------- omnicompletion BEGIN
