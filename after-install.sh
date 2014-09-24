@@ -1,22 +1,6 @@
 #!/bin/bash - 
-#===============================================================================
-#
-#          FILE: after-install.sh
-# 
-#         USAGE: ./after-install.sh 
-# 
-#   DESCRIPTION: 
-# 
-#       OPTIONS: ---
-#  REQUIREMENTS: ---
-#          BUGS: ---
-#         NOTES: ---
-#        AUTHOR: YOUR NAME (), 
-#  ORGANIZATION: 
-#       CREATED: 09/02/2014 01:12
-#      REVISION:  ---
-#===============================================================================
 
+finished=install_finised
 set -o nounset                              # Treat unset variables as an error
 cd bundle/
 
@@ -25,5 +9,13 @@ npm install
 cd ..
 
 cd YouCompleteMe/
-./install.sh --clang-completer
+if [ !-e $finished ] 
+then
+    touch $finished
+    ./install.sh --clang-completer
+fi
+cd ..
+
+cd vim-node/
+bundle install
 cd ..
