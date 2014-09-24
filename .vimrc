@@ -1,11 +1,10 @@
-"edit by Jie Feng
+f"Jie Feng's .vimrc, jiefeng.hopkins@gmail.com
 "vundle{{{
 set nocompatible              " be iMproved, required
 filetype off                  " required
-"edit file{{{
-nmap <localleader>ev :tabedit $MYVIMRC<cr>'tzo
-nmap <localleader>em :tabedit makefile
-nmap <localleader>ej :tabedit ~/.jslintrc<cr>'tzo
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Plugin 'gmarik/vundle'
 "}}}
 "edit .vimrc and refresh{{{
 nnoremap <localleader>ia mzgg=G`z
@@ -14,16 +13,6 @@ nnoremap <localleader>sv :source $MYVIMRC<cr>
 nnoremap <localleader>ft :execute 'set ft=' . &filetype<cr>
 nnoremap <localleader>s% :source %<cr>
 "}}}
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-" alternatively, pass a path where Vundle should install plugins
-"let path = '~/some/path/here'
-"call vundle#rc(path)
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/vundle'
 Plugin 'ervandew/supertab'
 Plugin 'tomtom/tlib_vim' " This library provides some utility functions
 Plugin 'klen/rope-vim'
@@ -32,7 +21,21 @@ Plugin 'marcweber/vim-addon-manager'
 Plugin 'marcweber/vim-addon-mw-utils'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Raimondi/delimitMate'
-"{{{complete
+Plugin 'sirver/ultisnips'
+Plugin 'sjl/gundo.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-scripts/VimLite'
+Plugin 'L9' "provides some utility functions and commands for programming in Vim
+"pathogen"{{{
+Plugin 'tpope/vim-pathogen'
+set laststatus=2
+set nocp
+execute pathogen#infect()
+execute pathogen#helptags()
+syntax on
+filetype plugin indent on
+"}}}
+"{{{code completion, complete
 Plugin 'Valloric/YouCompleteMe'
 " These are the tweaks I apply to YCM's config, you don't need them but they might help.
 " YCM gives you popups and splits by default that some people might not like, so these should tidy it up a bit for you.
@@ -78,8 +81,13 @@ augroup filetype_ruby
     autocmd FileType ruby nnoremap <F9> :execute "!ruby ./" .  expand("%") <CR>
     autocmd FileType ruby setlocal statusline=%f-%y-[%l]/[%L]
 augroup END
+augroup filetype_eruby
+    autocmd!
+    autocmd FileType eruby set foldmethod=indent
+augroup END
 "}}}
 "{{{html haml slim
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'} "writing html faster
 Plugin 'slim-template/vim-slim.git'
 Plugin 'tpope/vim-haml'
 Plugin 'mattn/emmet-vim'
@@ -90,6 +98,7 @@ augroup filetype_html
     autocmd FileType html nnoremap <buffer> <localleader>c I<!--<esc>A--><esc>
     autocmd FileType html set sw=4
     autocmd FileType html iabbrev <buffer> --- &mdash;
+    autocmd FileType html setlocal foldmethod=indent 
     autocmd FileType html iabbrev <buffer> `` &ldquo;
     autocmd FileType html iabbrev <buffer> '' &rdquo;
 augroup END
@@ -111,6 +120,9 @@ augroup filetype_python
     autocmd FileType python setlocal statusline=%f-%y-[%l]/[%L]
     autocmd FileType python nnoremap <buffer> <localleader>c I#cesc>
     autocmd FileType python :iabbrev <buffer> iff if:<left>
+    autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
+    autocmd FileType python match Excess /\%80v.*/
+    autocmd FileType python set nowrap
 augroup END
 "}}}
 autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
@@ -122,21 +134,37 @@ autocmd BufWritePost *.py call Flake8()
 "let g:flake8_cmd="/opt/strangebin/flake8000"
 "}}}
 "{{{ javascript nodejs
-Plugin 'sleistner/vim-jshint'
+"indentation
+Plugin 'nathanaelkane/vim-indent-guides'
+"vim-javascript
+    Plugin 'pangloss/vim-javascript'
+    let javascript_enable_domhtmlcss = 0
+    let javascript_ignore_javaScriptdoc = 0
+    let g:javascript_conceal=0
+    let b:javascript_fold=1
+"Plugin 'sleistner/vim-jshint'
 "Plugin 'walm/jshint.vim'
+Plugin 'wookiehangover/jshint.vim'
+let g:JSHintHighlightErrorLine = 1
 Plugin 'marijnh/tern_for_vim'
 Plugin 'jQuery'
 Plugin 'moll/vim-node'
+"jshint2
+    "Plugin 'Shutnik/jshint2.vim'
+    "let jshint2_read = 1
+    "let jshint2_save = 1
+    "let jshint2_close = 0
+    "let jshint2_confirm = 0
+    "let jshint2_color = 1
+    "let jshint2_height = 10
 ":JSHint {file}
-"o to open in new window
-"go to preview file (open but maintain focus on jshint results)
-"q to close the quickfix window
-"jslint{{{
-"https://github.com/jshint/jshint/blob/master/examples/.jshintrc
-Plugin 'hallettj/jslint.vim'
-":JSLintUpdate
-":JSLintToggle
-"}}}
+    "o to open in new window
+    "go to preview file (open but maintain focus on jshint results)
+    "q to close the quickfix window
+"jslint
+    "Plugin 'hallettj/jslint.vim'
+    ":JSLintUpdate
+    ":JSLintToggle
 augroup filetype_javascript
     autocmd!
     autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
@@ -208,18 +236,9 @@ augroup filetype_perl
     autocmd FileType perl noremap <F10> :!perl % <cr>
 augroup END
 "}}}
-"scrooloose/syntastic{{{
-"syntax checking plugin
-Plugin 'scrooloose/syntastic'
-let g:syntastic_cpp_compiler_options = ' -std=c++11'
-let g:syntastic_check_on_open=1
-let g:syntastic_enable_signs=1
-"}}}
-"taglist{{{
-Plugin 'vim-scripts/taglist.vim'
-nnoremap <silent> <F4> :TlistUpdate<CR> :TlistToggle<CR>
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Auto_Open=0
+"{{{tagbar
+Plugin 'majutsushi/tagbar'
+nmap <F4> :TagbarToggle<CR>
 "}}}
 "{{{SingleCompile
 Plugin 'xuhdev/SingleCompile'
@@ -230,9 +249,6 @@ nmap <F10> :SCCompileRun<cr>
 Plugin 'TaskList.vim'
 map <localleader>td <Plug>TaskList
 "}}}
-Plugin 'sirver/ultisnips'
-Plugin 'sjl/gundo.vim'
-Plugin 'tpope/vim-fugitive'
 "{{{git github markdown
 Plugin 'tpope/vim-git'
 "markdown{{{
@@ -243,16 +259,6 @@ augroup filetype_markdown
 augroup END
 "}}}
 "}}}
-Plugin 'tpope/vim-pathogen'
-"{{{vim 
-Plugin 'vim-support'
-augroup filetype_vim
-    autocmd!
-    "autocmd FileType cpp,vim setlocal foldmethod=indent
-    autocmd FileType vim setlocal foldmethod=marker
-augroup END
-"}}}
-Plugin 'vim-scripts/VimLite'
 "{{{code beautify
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'einars/js-beautify'
@@ -261,12 +267,22 @@ autocmd FileType html noremap <buffer> <localleader>bb :call HtmlBeautify()<cr>
 autocmd FileType eruby noremap <buffer> <localleader>bb :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <localleader>bb :call CSSBeautify()<cr>
 "}}}
-
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" scripts from http://vim-scripts.org/vim/scripts.html
-Plugin 'L9'
+"{{{vimscript
+Plugin 'vim-support'
+augroup filetype_vimscript
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END 
+"}}}
+"scrooloose/syntastic{{{
+"syntax checking plugin
+Plugin 'scrooloose/syntastic'
+let g:syntastic_disabled_filetypes=['javascript', 'js']
+let g:syntastic_cpp_compiler_options = ' -std=c++11'
+let g:syntastic_jslint_checkers=['jshint']
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=1
+"}}}
 "{{{ctrlp
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -286,27 +302,6 @@ let g:ctrlp_user_command = 'find %s -type f'
 "nmap <localleader>b :FufBuffer<CR>
 "nmap <localleader>t :FufTaggedFile<CR>
 "}}}
-
-" scripts not on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-
-filetype plugin indent on     " required
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Plugin commands are not allowed.
-" Put your stuff after this line
-"}}}
-set tabpagemax=100
-set mouse=a
-colorscheme desert
-let mapleader = ","
-let maplocalleader = "\\"
-let g:pep8_map='<leader>8'
-map <localleader>g :GundoToggle<CR>
-set tags=tags
-set guioptions-=T
-set autoread
 " run and compile {{{
 " nnoremap <F9> :SCCompile<cr>
 "nnorema:C_CplusLFlags          = '-Wall -g -O0'         " C++ compiler flags:
@@ -315,26 +310,9 @@ set autoread
 nnoremap <localleader>run :execute "!%"<CR>
 nnoremap <F12> :execute "!./" .  expand("%:r") . " < in"<cr>
 " }}}
-nnoremap Q <nop>
 
-"functions{{{
-function! Repeat()
-    let times = input("Count: ")
-    let char  = input("Char: ")
-    exe ":normal a" . repeat(char, times)
-endfunction
-"}}}
-inoremap <C-u> <C-o>:call Repeat()<cr>
-"---------------------------- omnicompletion BEGIN
-let b:pymode_modified=1
-syntax on
-filetype on
-filetype plugin on
-set omnifunc=syntaxcomplete#Complete
-"---------------------------- omnicompletion END
-"shortcuts for searching patterns
-noremap ;; :%s:::g<Left><Left><Left>
-noremap ;' :%s:::cg<Left><Left><Left><Left>
+
+
 "plugins{{{
 "highlight errors {{{
 nnoremap <leader>w :match Error /\v +$/<cr>
@@ -399,11 +377,8 @@ nnoremap <leader>n :cnext<cr>
 nnoremap <leader>p :cprevious<cr>
 "}}}
 "FileType specific settings{{{
-"bash{{{
-let g:BASH_AuthorName   = 'Jie Feng'
-let g:BASH_Email        = 'jokerfeng2010@gmail.com'
-let g:BASH_Company      = 'The Johns Hopkins'
-"}}}
+
+let foldlevel=2
 "text {{{
 augroup text
     autocmd!
@@ -412,39 +387,22 @@ augroup text
     autocmd FileType text onoremap <buffer> ah :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rg_vk0"<cr>
 augroup END
 "}}}
-"pathogen load"{{{
-set laststatus=2
-set nocp
-execute pathogen#infect()
-execute pathogen#helptags()
-syntax on
+
+"}}}
+"{{{settings
 filetype plugin indent on
-"}}}
-"vimscript {{{
-augroup vimrc_autocmds
-    autocmd!
-    " highlight characters past column 120
-    autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
-    autocmd FileType python match Excess /\%80v.*/
-    autocmd FileType python set nowrap
-augroup END
-
-"}}}
-"eruby {{{
-augroup eruby_autocmds
-    autocmd!
-    autocmd FileType eruby set foldmethod=indent
-augroup END
-
-"}}}
-"}}}
-"shorcut candidates{{{
-"---------------------------- disable key :inoremap <esc> <nop>
-"autocmd BufNewFile * :write
-"autocmd BufWritePre,BufRead *.html :normal gg=G
-"autocmd BufWritePost .vimrc :source ~/.vimrc
-"}}}
-"set default folder {{{
+set tabpagemax=100
+set mouse=a
+colorscheme desert
+let mapleader = ","
+let maplocalleader = "\\"
+let g:pep8_map='<leader>8'
+map <localleader>g :GundoToggle<CR>
+set tags=tags
+set guioptions-=T
+set autoread
+nnoremap Q <nop>
+"{{{default folder 
 if has("unix") 
 elseif has("win32") 
     if exists("$OS") && ($OS == "Windows_NT") 
@@ -454,11 +412,24 @@ elseif has("win32")
     endif 
 endif 
 "}}}
-"---------handy shortcuts--------------------{{{
-function! MouseAction(state)
-    execute "!xinput set-prop 14 'Device Enabled' " . a:state 
-endfunction
-
+"{{{tab completion and documentation
+let g:SuperTabDefaultCompletionType = "context"
+set completeopt=menuone,longest,preview
+"}}}
+"}}}
+"{{{handy shortcuts
+"edit file{{{
+nmap <localleader>ev :tabedit $MYVIMRC<cr>'tzo
+nmap <localleader>em :tabedit makefile
+nmap <localleader>ej :tabedit ~/.jshintrc<cr>'tzo
+"}}}
+"{{{shell
+nnoremap <localleader>sh :sh<cr>
+let g:BASH_AuthorName   = 'Jie Feng'
+let g:BASH_Email        = 'jokerfeng2010@gmail.com'
+let g:BASH_Company      = 'The Johns Hopkins'
+"}}}
+"{{{spell
 function! SpellCheck()
     if (&spell)
         set nospell
@@ -466,24 +437,26 @@ function! SpellCheck()
         set spell
     endif
 endfunction
-
 noremap <localleader>spc :call SpellCheck()<cr>
-nnoremap / /\v
+"}}}
+"{{{search shortcuts
+"nnoremap / /\v
 nnoremap <leader>/ :nohlsearch<cr>
 nnoremap <localleader>h :set hlsearch!<cr>
-nnoremap <localleader>sh :sh<cr>
-
-
-
+noremap ;; :%s:::g<Left><Left><Left>
+noremap ;' :%s:::cg<Left><Left><Left><Left>
+"}}}
+"{{{copy paste 
+"copy all inside vim
 nnoremap <C-A> <esc>ggyG
+"copy all out of vim
 nnoremap <C-X><C-A> <esc>gg"+yG
+"copy text in visual mode
 vnoremap <C-C> "+yy
+"paste text in insertion mode
 inoremap <C-X><C-V> <esc>"+pa
+"paste text in normal mode
 nnoremap <C-X><C-V> "+p
-"open touch pad
-
-nnoremap <silent> <C-X><C-M> :call MouseAction(1)<cr><cr>
-nnoremap <silent> <C-X><C-N> :call MouseAction(0)<cr><cr>
 "}}}
 "move tabs{{{
 nnoremap <C-l> gt
@@ -495,7 +468,10 @@ nnoremap <C-right> gt
 inoremap <C-left> <esc>gT
 inoremap <C-right> <esc>gt
 "}}}
-"tab completion and documentation{{{
-let g:SuperTabDefaultCompletionType = "context"
-set completeopt=menuone,longest,preview
+"{{{candidates
+"inoremap <esc> <nop>              "disable key 
+"autocmd BufNewFile * :write
+"autocmd BufWritePre,BufRead *.html :normal gg=G
+"autocmd BufWritePost .vimrc :source ~/.vimrc
+"}}}
 "}}}
