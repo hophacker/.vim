@@ -1,15 +1,21 @@
 #!/bin/bash - 
+set -o nounset                              # Treat unset variables as an error
 
 finished=install_finised
-set -o nounset                              # Treat unset variables as an error
+
+rm ~/.vimrc
+ln ~/.vim/.vimrc ~/.vimrc -s
+
 cd bundle/
 
 cd tern_for_vim/
-npm install
+sudo npm install
 cd ..
 
+
+sudo apt install cmake
 cd YouCompleteMe/
-if [ !-e $finished ] 
+if [ ! -e $finished ] 
 then
     touch $finished
     ./install.sh --clang-completer

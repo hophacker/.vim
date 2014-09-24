@@ -24,5 +24,5 @@ then
 fi
 
 #jslint(http://github.com/hallettj/jslint.vim)
-sudo apt-get install rhino
+sudo apt install rhino npm
 sudo npm install -g jshint
