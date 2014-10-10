@@ -122,8 +122,9 @@ autocmd BufWritePost *.py call Flake8()
 "let g:flake8_cmd="/opt/strangebin/flake8000"
 "}}}
 "{{{ javascript nodejs
-Plugin 'sleistner/vim-jshint'
 "Plugin 'walm/jshint.vim'
+Plugin 'wookiehangover/jshint.vim'
+let g:JSHintHighlightErrorLine = 1
 Plugin 'marijnh/tern_for_vim'
 Plugin 'jQuery'
 Plugin 'moll/vim-node'
@@ -133,7 +134,7 @@ Plugin 'moll/vim-node'
 "q to close the quickfix window
 "jslint{{{
 "https://github.com/jshint/jshint/blob/master/examples/.jshintrc
-Plugin 'hallettj/jslint.vim'
+"Plugin 'hallettj/jslint.vim'
 ":JSLintUpdate
 ":JSLintToggle
 "}}}
