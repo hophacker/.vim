@@ -66,7 +66,8 @@ let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 "}}}
 "scrooloose/nerdtree{{{
 Plugin 'scrooloose/nerdtree'
-map <localleader>nt :NERDTreeToggle<CR>
+map <localleader>n :NERDTreeToggle<CR>
+autocmd vimenter * NERDTree
 "}}}
 "{{{latex tex
 Plugin 'latex-support.vim'
