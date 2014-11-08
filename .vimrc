@@ -1,4 +1,43 @@
 "Jie Feng's .vimrc, jiefeng.hopkins@gmail.com
+"{{{settings
+filetype plugin indent on
+set tabpagemax=100
+set mouse=a
+colorscheme desert
+let mapleader = " "
+let maplocalleader = "\\"
+let g:pep8_map='<leader>8'
+map <localleader>g :GundoToggle<CR>
+set tags=tags
+set guioptions-=T
+set autoread
+nnoremap Q <nop>
+"{{{default folder 
+if has("unix") 
+elseif has("win32") 
+    if exists("$OS") && ($OS == "Windows_NT") 
+        cd D:\cygwin64\home\joker_000\
+    else 
+        cd "~" 
+    endif 
+endif 
+"}}}
+"{{{tab completion and documentation
+let g:SuperTabDefaultCompletionType = "context"
+set completeopt=menuone,longest,preview
+"}}}
+"}}}
+" Quicker window movement, tabs movement{{{
+nnoremap <Down> <C-w>j
+nnoremap <Up> <C-w>k
+nnoremap <Left> <C-w>h
+nnoremap <Right> <C-w>l
+nnoremap <c-h> gt
+nnoremap <c-l> gT
+inoremap <c-h> <esc>gt
+inoremap <c-l> <esc>gT
+"}}}
+
 "vundle begin{{{
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -24,9 +63,9 @@ Plugin 'Raimondi/delimitMate'
 "{{{ultisnips
 Plugin 'sirver/ultisnips'
 
-let g:UltiSnipsExpandTrigger="<c-e>"
-let g:UltiSnipsJumpForwardTrigger="<c-x c-n>"
-let g:UltiSnipsJumpBackwardTrigger="<c-x c-p>"
+let g:UltiSnipsExpandTrigger="<C-e>"
+let g:UltiSnipsJumpForwardTrigger="<C-x C-n>"
+let g:UltiSnipsJumpBackwardTrigger="<C-x C-p>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -66,8 +105,8 @@ let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 "}}}
 "scrooloose/nerdtree{{{
 Plugin 'scrooloose/nerdtree'
-map <localleader>n :NERDTreeToggle<CR>
-autocmd vimenter * NERDTree
+map <localleader>N :NERDTreeToggle<CR>
+"autocmd vimenter * NERDTree
 "}}}
 "{{{latex tex
 Plugin 'latex-support.vim'
@@ -80,7 +119,7 @@ augroup filetype_tex
     autocmd FileType tex nnoremap <F7> :execute "set ft=text"<cr>
     autocmd FileType tex set textwidth=120
     autocmd FileType tex nnoremap <F6> :execute "!evince " . expand('%:r').".pdf &" <cr>
-    autocmd FileType tex nnoremap <F8> g<c-g>
+    autocmd FileType tex nnoremap <F8> g<C-g>
 augroup END
 "}}}
 "{{{ruby rails
@@ -197,8 +236,8 @@ augroup END
 Plugin 'Rip-Rip/clang_complete'
 let g:clang_library_path = "/usr/lib/llvm-3.4/lib/"
 let g:clang_library_file = "libclang.so.1"
-let g:SuperTabDefaultCompletionType = "<c-n>"
-let g:SuperTabContextDefaultCompletionType = '<c-x><c-u>'
+let g:SuperTabDefaultCompletionType = "<C-n>"
+let g:SuperTabContextDefaultCompletionType = '<C-x><C-u>'
 let g:clang_complete_auto = 1
 
 " Clang Complete Settings
@@ -293,7 +332,7 @@ let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
 "}}}
 "{{{ctrlp
-let g:ctrlp_map = '<c-p>'
+let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 Plugin 'kien/ctrlp.vim'
 nnoremap <C-A-b> :CtrlPBuffer<cr>
@@ -320,9 +359,6 @@ let g:ctrlp_user_command = 'find %s -type f'
 nnoremap <localleader>run :execute "!%"<CR>
 nnoremap <F12> :execute "!./" .  expand("%:r") . " < in"<cr>
 " }}}
-
-
-
 "vundle end{{{
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -367,21 +403,21 @@ iabbrev ednl endl
 noremap <localleader><space> viw
 "---------------------------- no further mapping
 noremap <localleader>do ggVG:!tr '\n' ' '<cr><esc>"+yy
-"nnoremap <c-u> viwUw
+"nnoremap <C-u> viwUw
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 "}}}
 "insert mode mappings {{{
-"inoremap <c-d> <esc>ddi
-"inoremap <c-u> <esc>lviwUwi
+"inoremap <C-d> <esc>ddi
+"inoremap <C-u> <esc>lviwUwi
 "}}}
 "visual mode mappings {{{
 "vnoremap " <esc>`<i"<esc>`>a"<esc>
 "}}}
 "operator-pending mappings {{{
 onoremap b /return<cr>
-onoremap in( :<c-u>normal! f(vi(<cr>
-onoremap il( :<c-u>normal! F)vi(<cr>
-onoremap ie :<c-u>execute "normal! 
+onoremap in( :<C-u>normal! f(vi(<cr>
+onoremap il( :<C-u>normal! F)vi(<cr>
+onoremap ie :<C-u>execute "normal! 
             \/[a-zA-Z0-9._]\\+@[a-zA-Z0-9._]\\+\\.[a-zA-Z]\\{2,3}\rv/@\rE"<cr>
 "}}}
 "open window-buffer mappings {{{
@@ -398,39 +434,11 @@ let foldlevel=2
 augroup text
     autocmd!
     autocmd FileType text nnoremap <F7> :set ft=tex<cr>
-    autocmd FileType text onoremap <buffer> ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
-    autocmd FileType text onoremap <buffer> ah :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rg_vk0"<cr>
+    autocmd FileType text onoremap <buffer> ih :<C-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
+    autocmd FileType text onoremap <buffer> ah :<C-u>execute "normal! ?^==\\+$\r:nohlsearch\rg_vk0"<cr>
 augroup END
 "}}}
 
-"}}}
-"{{{settings
-filetype plugin indent on
-set tabpagemax=100
-set mouse=a
-colorscheme desert
-let mapleader = ","
-let maplocalleader = "\\"
-let g:pep8_map='<leader>8'
-map <localleader>g :GundoToggle<CR>
-set tags=tags
-set guioptions-=T
-set autoread
-nnoremap Q <nop>
-"{{{default folder 
-if has("unix") 
-elseif has("win32") 
-    if exists("$OS") && ($OS == "Windows_NT") 
-        cd D:\cygwin64\home\joker_000\
-    else 
-        cd "~" 
-    endif 
-endif 
-"}}}
-"{{{tab completion and documentation
-let g:SuperTabDefaultCompletionType = "context"
-set completeopt=menuone,longest,preview
-"}}}
 "}}}
 "{{{handy shortcuts
 "edit file{{{
@@ -472,16 +480,6 @@ vnoremap <C-C> "+yy
 inoremap <C-X><C-V> <esc>"+pa
 "paste text in normal mode
 nnoremap <C-X><C-V> "+p
-"}}}
-"move tabs{{{
-nnoremap <C-l> gt
-nnoremap <C-h> gT
-inoremap <C-l> <esc>gt
-inoremap <C-h> <esc>gT
-nnoremap <C-left> gT
-nnoremap <C-right> gt
-inoremap <C-left> <esc>gT
-inoremap <C-right> <esc>gt
 "}}}
 "{{{candidates
 "inoremap <esc> <nop>              "disable key 

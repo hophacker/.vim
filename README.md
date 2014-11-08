@@ -4,7 +4,17 @@
 
 ###Buffer
 
-**:bn, :bp, :b #, :b name**, and **ctrl-6**(or **#ctrl-6** switches to buffer number #).)to switch between buffers. 
+`:bn, :bp, :b #, :b name`, and `ctrl-6`(or `#ctrl-6` switches to buffer number #s).)to switch between buffers. 
 
-###Window and Tap
-`\<C-w>gf` open file under cursor in a new tab
+* `\<C-w>gf` open file under cursor in a new tab 
+* `<C-N>` open NERDTrees
+
+
+##Vimscript
+
+### concatenate string
+```vimscript
+if filereadable($HOME . "/.vimrc.local")
+  source ~/.vimrc.local
+endif
+```
