@@ -1,41 +1,133 @@
 "Jie Feng's .vimrc, jiefeng.hopkins@gmail.com
-"{{{settings
+source ~/.vim/functions.vim
+"settings{{{
 filetype plugin indent on
+filetype plugin indent on
+set number
+set ts=2
+set sw=2
+set history=700
 set tabpagemax=100
-set mouse=a
-colorscheme desert
-let mapleader = " "
-let maplocalleader = "\\"
-let g:pep8_map='<leader>8'
-map <localleader>g :GundoToggle<CR>
-set tags=tags
-set guioptions-=T
 set autoread
-nnoremap Q <nop>
-"{{{default folder 
-if has("unix") 
-elseif has("win32") 
-    if exists("$OS") && ($OS == "Windows_NT") 
-        cd D:\cygwin64\home\joker_000\
-    else 
-        cd "~" 
-    endif 
-endif 
+set so=5 "set 5 lines to the cursor
+set cmdheight=1
+set encoding=utf8
+set tags=tags
+syntax enable 
+try
+    colorscheme desert
+catch
+endtry
+if has("gui_running")
+    set guioptions-=T
+    set guioptions-=e
+    set t_Co=256
+    set guitablabel=%M\ %t
+endif
 "}}}
+"{{{line break
+set lbr 
+set tw=500 
+"}}}"
+"{{{tab indent
+set expandtab
+set smarttab
+set autoindent
+set smartindent
+"}}}
+"{{{search and case
+set hlsearch incsearch
+set ignorecase
+set smartcase
+"}}}
+"backups{{{
+"Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup 
+set nowb
+set noswapfile
+"}}}
+" Specify the behavior when switching between buffers {{{
+try
+  set switchbuf=useopen,usetab,newtab
+  set stal=2
+catch
+endtry
+"}}}
+" Return to last edit position when opening files{{{
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+"}}}
+"{{{mouse
+if has('mouse')
+  set mouse=a
+endif
+"}}}
+"statusline{{{
+"set statusline=%F          fullpath
+"set statusline=%.20F       change the maximum width
+set statusline=%f         " Path to the file
+set statusline+=\ -\      " Separator
+set statusline+=FileType: " Label
+set statusline+=%y        " Filetype of the file
+set statusline+=%{fugitive#statusline()} " which branch
+set statusline+=(%2v)%4l   " Current line
+"set statusline=%04l
+"set statusline=%-4l
+set statusline+=/    " Separator
+set statusline+=%L   " Total lines
+"}}}
+
+"{{{leader
+let mapleader = ","
+let g:mapleader = ","
+nmap <leader>w :w!<cr>
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+"spell checking{{{
+noremap <leader>ss :call SpellCheck()<cr>
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zg
+map <leader>s? z=
+"}}}
+"tabs management{{{
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove 
+map <leader>t<leader> :tabnext 
+    "Let 'tl' toggle between this and the last accessed tab
+let g:lasttab = 1
+nmap <Leader>tt :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+    "Opens a new tab with the current buffer's path
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+"}}}
+"Toggle paste mode on and off
+map <leader>md :tabe ~/buffer.md<cr>
+"}}}
+"{{{localleader
+let maplocalleader = "\\"
+let g:maplocalleader = "\\"
+"}}}
+
+"{{{editing
+"}}}
+nnoremap Q <nop>
 "{{{tab completion and documentation
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
 "}}}
-"}}}
-" Quicker window movement, tabs movement{{{
+"window, tabs{{{
 nnoremap <Down> <C-w>j
 nnoremap <Up> <C-w>k
 nnoremap <Left> <C-w>h
 nnoremap <Right> <C-w>l
-nnoremap <c-h> gt
-nnoremap <c-l> gT
-inoremap <c-h> <esc>gt
-inoremap <c-l> <esc>gT
+nnoremap <c-l> gt
+nnoremap <c-h> gT
+inoremap <c-l> <esc>gt
+inoremap <c-h> <esc>gT
 "}}}
 
 "vundle begin{{{
@@ -70,7 +162,10 @@ let g:UltiSnipsJumpBackwardTrigger="<C-x C-p>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 "}}}
+"{{{gundo
 Plugin 'sjl/gundo.vim'
+map <localleader>g :GundoToggle<CR>
+"}}}
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/VimLite'
 Plugin 'L9' "provides some utility functions and commands for programming in Vim
@@ -80,8 +175,6 @@ set laststatus=2
 set nocp
 execute pathogen#infect()
 execute pathogen#helptags()
-syntax on
-filetype plugin indent on
 "}}}
 "{{{code completion, complete
 Plugin 'Valloric/YouCompleteMe'
@@ -128,6 +221,7 @@ Plugin 'vim-ruby/vim-ruby'
 augroup filetype_ruby
     autocmd!
     autocmd FileType ruby set sw=2
+    autocmd FileType ruby set ts=2
     autocmd FileType ruby nnoremap <F9> :execute "!ruby ./" .  expand("%") <CR>
     autocmd FileType ruby setlocal statusline=%f-%y-[%l]/[%L]
 augroup END
@@ -136,145 +230,12 @@ augroup filetype_eruby
     autocmd FileType eruby set foldmethod=indent
 augroup END
 "}}}
-"{{{html haml slim
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'} "writing html faster
-Plugin 'slim-template/vim-slim.git'
-Plugin 'tpope/vim-haml'
-Plugin 'mattn/emmet-vim'
-augroup filetype_html
-    autocmd!
-    "autocmd FileType html setlocal indentkeys-=*<Return>
-    autocmd BufWritePre,BufRead *.html setlocal nowrap
-    autocmd FileType html nnoremap <buffer> <localleader>c I<!--<esc>A--><esc>
-    autocmd FileType html set sw=4
-    autocmd FileType html iabbrev <buffer> --- &mdash;
-    autocmd FileType html setlocal foldmethod=indent 
-    autocmd FileType html iabbrev <buffer> `` &ldquo;
-    autocmd FileType html iabbrev <buffer> '' &rdquo;
-augroup END
-let g:html_indent_inctags = "html,body,head,tbody"
-"}}}
-"{{{python
-Plugin 'vim-scripts/pydoc.vim'
-Plugin 'alfredodeza/pytest.vim'
-Plugin 'nvie/vim-pyunit'
-Plugin 'klen/python-mode'
-Plugin 'nvie/vim-flake8'
-"python filetype{{{
-augroup filetype_python
-    autocmd!
-    "autocmd FileType python set omnifunc=pythoncomplete#Complete
-    autocmd FileType python setlocal foldmethod=indent
-    autocmd FileType python nnoremap <F12> :execute "!./" .  expand("%") <CR>
-    autocmd FileType python setlocal foldlevel=99
-    autocmd FileType python setlocal statusline=%f-%y-[%l]/[%L]
-    autocmd FileType python nnoremap <buffer> <localleader>c I#cesc>
-    autocmd FileType python :iabbrev <buffer> iff if:<left>
-    autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
-    autocmd FileType python match Excess /\%80v.*/
-    autocmd FileType python set nowrap
-augroup END
-"}}}
-autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
-let g:flake8_builtins="_,apply"
-let g:flake8_ignore="E501,W293"
-let g:flake8_max_line_length=99
-let g:flake8_max_complexity=10
-autocmd BufWritePost *.py call Flake8()
-"let g:flake8_cmd="/opt/strangebin/flake8000"
-"}}}
-"{{{ javascript nodejs
-"indentation
-Plugin 'nathanaelkane/vim-indent-guides'
-"vim-javascript
-    Plugin 'pangloss/vim-javascript'
-    let javascript_enable_domhtmlcss = 0
-    let javascript_ignore_javaScriptdoc = 0
-    let g:javascript_conceal=0
-    let b:javascript_fold=1
-"Plugin 'sleistner/vim-jshint'
-"Plugin 'walm/jshint.vim'
-"Plugin 'wookiehangover/jshint.vim'
-let g:JSHintHighlightErrorLine = 1
-Plugin 'marijnh/tern_for_vim'
-Plugin 'jQuery'
-Plugin 'moll/vim-node'
-"jshint2
-    Plugin 'Shutnik/jshint2.vim'
-    let jshint2_read = 1
-    let jshint2_save = 1
-    let jshint2_close = 0
-    let jshint2_confirm = 0
-    let jshint2_color = 1
-    let jshint2_height = 2
-":JSHint {file}
-    "o to open in new window
-    "go to preview file (open but maintain focus on jshint results)
-    "q to close the quickfix window
-"jslint
-    "Plugin 'hallettj/jslint.vim'
-    ":JSLintUpdate
-    ":JSLintToggle
-augroup filetype_javascript
-    autocmd!
-    autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
-    autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
-augroup END
-"}}}
-"{{{c cpp D
-Plugin 'Hackerpilot/DCD'
-"c/cpp filetype{{{
-augroup filetype_c_cpp
-    autocmd!
-    autocmd FileType *
-                \	if ( &filetype == 'cpp' || &filetype == 'c') |
-                \	    set nowrap |
-                \	endif
-augroup END
-"}}}
-"clang_complete{{{
-Plugin 'Rip-Rip/clang_complete'
-let g:clang_library_path = "/usr/lib/llvm-3.4/lib/"
-let g:clang_library_file = "libclang.so.1"
-let g:SuperTabDefaultCompletionType = "<C-n>"
-let g:SuperTabContextDefaultCompletionType = '<C-x><C-u>'
-let g:clang_complete_auto = 1
-
-" Clang Complete Settings
-let g:clang_use_library=1
-let g:clang_debug = 1
-" if there's an error, allow us to see it
-let g:clang_complete_copen=1
-let g:clang_complete_macros=1
-let g:clang_complete_patterns=0
-" Limit memory use
-let g:clang_memory_percent=70
-" Remove -std=c++11 if you don't use C++ for everything like I do.
-let g:clang_user_options=' -std=c++11 || exit 0'
-" Set this to 0 if you don't want autoselect, 1 if you want autohighlight,
-" and 2 if you want autoselect. 0 will make you arrow down to select the first
-" option, 1 will select the first option for you, but won't insert it unless you
-" press enter. 2 will automatically insert what it thinks is right. 1 is the most
-" convenient IMO, and it defaults to 0.
-let g:clang_auto_select=2
-set conceallevel=2
-set concealcursor=vin
-let g:clang_snippets=1
-let g:clang_conceal_snippets=1
-" The single one that works with clang_complete
-let g:clang_snippets_engine='clang_complete'
-"""}}}
+source ~/.vim/python.vim
+source ~/.vim/js.vim
+source ~/.vim/html.vim
 "D language {{{
 "let g:dcd_path=['/home/john/DCD/']
 let g:dcd_importPath=['/home/john/programming/D/','/usr/include/dmd/druntime/import']
-"}}}
-"cvim{{{
-Plugin 'git://github.com/hophacker/cvim'
-let s:C_CFlags         				= ' -g -O0 -c'      " C compiler flags: compile, don't optimize
-let s:C_LFlags         				= ' -g -O0'         " C compiler flags: link   , don't optimize
-let s:C_CplusCFlags         	= '-std=c++11 -g -O0 -c -Wno-deprecated'      " C++ compiler flags: compile, don't optimize
-let s:C_CplusLFlags         	= '-std=c++11 -g -O0 -Wno-deprecated'         " C++ compiler flags: link   , don't optimize
-"}}}
 "}}}
 "{{{perl awk bash
 Plugin 'vim-perl/vim-perl'
@@ -284,6 +245,10 @@ augroup filetype_perl
     autocmd!
     autocmd FileType perl noremap <F10> :!perl % <cr>
 augroup END
+nnoremap <localleader>sh :sh<cr>
+let g:BASH_AuthorName   = 'Jie Feng'
+let g:BASH_Email        = 'jokerfeng2010@gmail.com'
+let g:BASH_Company      = 'The Johns Hopkins'
 "}}}
 "{{{tagbar
 Plugin 'majutsushi/tagbar'
@@ -320,6 +285,7 @@ Plugin 'vim-support'
 augroup filetype_vimscript
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
+    autocmd FileType vim let g:foldlevel=1
 augroup END 
 "}}}
 "scrooloose/syntastic{{{
@@ -363,36 +329,10 @@ nnoremap <F12> :execute "!./" .  expand("%:r") . " < in"<cr>
 call vundle#end()            " required
 filetype plugin indent on    " required
 "}}}
-
 "plugins{{{
 "highlight errors {{{
 nnoremap <leader>w :match Error /\v +$/<cr>
 nnoremap <leader>W :match none<cr>k}}}
-"editing set{{{
-"set foldmethod=indent
-set shiftwidth=4
-set tabstop=4
-set expandtab
-set autoindent
-set smartindent
-set cindent
-set number
-set hlsearch incsearch
-"}}}
-"statusline--- {{{
-"set statusline=%F          fullpath
-"set statusline=%.20F       change the maximum width
-set statusline=%f         " Path to the file
-set statusline+=\ -\      " Separator
-set statusline+=FileType: " Label
-set statusline+=%y        " Filetype of the file
-set statusline+=%{fugitive#statusline()} " which branch
-set statusline+=(%2v)%4l   " Current line
-"set statusline=%04l
-"set statusline=%-4l
-set statusline+=/    " Separator
-set statusline+=%L   " Total lines
-"}}}
 "abbreviations {{{
 iabbrev "- "----------------------------
 iabbrev mysig -- <cr>Jie Feng<cr>jokerfeng2010@gmai.com
@@ -429,7 +369,6 @@ nnoremap <leader>p :cprevious<cr>
 "}}}
 "FileType specific settings{{{
 
-let foldlevel=2
 "text {{{
 augroup text
     autocmd!
@@ -445,22 +384,6 @@ augroup END
 nmap <localleader>ev :tabedit $MYVIMRC<cr>'tzo
 nmap <localleader>em :tabedit makefile
 nmap <localleader>ej :tabedit ~/.jshintrc<cr>'tzo
-"}}}
-"{{{shell
-nnoremap <localleader>sh :sh<cr>
-let g:BASH_AuthorName   = 'Jie Feng'
-let g:BASH_Email        = 'jokerfeng2010@gmail.com'
-let g:BASH_Company      = 'The Johns Hopkins'
-"}}}
-"{{{spell
-function! SpellCheck()
-    if (&spell)
-        set nospell
-    else
-        set spell
-    endif
-endfunction
-noremap <localleader>spc :call SpellCheck()<cr>
 "}}}
 "{{{search shortcuts
 "nnoremap / /\v
