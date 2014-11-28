@@ -15,16 +15,6 @@ set cmdheight=1
 set encoding=utf8
 set tags=tags
 syntax enable 
-try
-    colorscheme desert
-catch
-endtry
-if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-endif
 "}}}
 "{{{line break
 set lbr 
@@ -68,21 +58,23 @@ endif
 "statusline{{{
 "set statusline=%F          fullpath
 "set statusline=%.20F       change the maximum width
-set statusline=%f         " Path to the file
-set statusline+=\ -\      " Separator
-set statusline+=FileType: " Label
-set statusline+=%y        " Filetype of the file
-set statusline+=%{fugitive#statusline()} " which branch
-set statusline+=(%2v)%4l   " Current line
-"set statusline=%04l
-"set statusline=%-4l
-set statusline+=/    " Separator
-set statusline+=%L   " Total lines
+  "set statusline=%f         " Path to the file
+  "set statusline+=\ -\      " Separator
+  "set statusline+=FileType: " Label
+  "set statusline+=%y        " Filetype of the file
+  "set statusline+=%{fugitive#statusline()} " which branch
+  "set statusline+=(%2v)%4l   " Current line
+  ""set statusline=%04l
+  ""set statusline=%-4l
+  "set statusline+=/    " Separator
+  "set statusline+=%L   " Total lines
 "}}}
 
 "{{{leader
 let mapleader = ","
 let g:mapleader = ","
+nm <leader>lm :marks<cr>
+nm <silent><Leader><C-]> <C-w><C-]><C-w>T
 nmap <leader>w :w!<cr>
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 "spell checking{{{
@@ -145,6 +137,12 @@ nnoremap <localleader>sv :source $MYVIMRC<cr>
 nnoremap <localleader>ft :execute 'set ft=' . &filetype<cr>
 nnoremap <localleader>s% :source %<cr>
 "}}}
+"{{{statusline
+Plugin 'bling/vim-airline' 
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#left_sep = ' '
+"let g:airline#extensions#tabline#left_alt_sep = '|'
+"}}}
 Plugin 'ervandew/supertab'
 Plugin 'tomtom/tlib_vim' " This library provides some utility functions
 Plugin 'klen/rope-vim'
@@ -154,6 +152,26 @@ Plugin 'marcweber/vim-addon-manager'
 Plugin 'marcweber/vim-addon-mw-utils'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Raimondi/delimitMate'
+"{{{color scheme
+try
+    colorscheme desert
+catch
+endtry
+if has("gui_running")
+    set guioptions-=T
+    set guioptions-=e
+    set t_Co=256
+    set guitablabel=%M\ %t
+endif
+"Plugin 'altercation/vim-colors-solarized' " color scheme
+"if has('gui_running')
+    "set background=light
+"else
+    "set background=dark
+"endif
+"colorscheme solarized
+"}}}
+
 "{{{ultisnips
 Plugin 'sirver/ultisnips'
 
@@ -180,10 +198,13 @@ execute pathogen#helptags()
 "}}}
 "{{{code completion, complete
 Plugin 'Valloric/YouCompleteMe'
-" These are the tweaks I apply to YCM's config, you don't need them but they might help.
-" YCM gives you popups and splits by default that some people might not like, so these should tidy it up a bit for you.
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
 let g:ycm_add_preview_to_completeopt=0
 let g:ycm_confirm_extra_conf=0
+let g:ycm_server_use_vim_stdout = 1 
+let g:ycm_server_log_level = 'debug'
 set completeopt-=preview
 "}}}
 "{{{snipmate snippets
@@ -200,7 +221,7 @@ let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 "}}}
 "scrooloose/nerdtree{{{
 Plugin 'scrooloose/nerdtree'
-map <localleader>N :NERDTreeToggle<CR>
+map <localleader>nt :NERDTreeToggle<CR>
 "autocmd vimenter * NERDTree
 "}}}
 "{{{latex tex
@@ -235,6 +256,7 @@ augroup END
 source ~/.vim/python.vim
 source ~/.vim/js.vim
 source ~/.vim/html.vim
+source ~/.vim/c.vim
 "D language {{{
 "let g:dcd_path=['/home/john/DCD/']
 let g:dcd_importPath=['/home/john/programming/D/','/usr/include/dmd/druntime/import']
