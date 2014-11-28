@@ -15,16 +15,6 @@ set cmdheight=1
 set encoding=utf8
 set tags=tags
 syntax enable 
-try
-    colorscheme desert
-catch
-endtry
-if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-endif
 "}}}
 "{{{line break
 set lbr 
@@ -68,16 +58,16 @@ endif
 "statusline{{{
 "set statusline=%F          fullpath
 "set statusline=%.20F       change the maximum width
-set statusline=%f         " Path to the file
-set statusline+=\ -\      " Separator
-set statusline+=FileType: " Label
-set statusline+=%y        " Filetype of the file
-set statusline+=%{fugitive#statusline()} " which branch
-set statusline+=(%2v)%4l   " Current line
-"set statusline=%04l
-"set statusline=%-4l
-set statusline+=/    " Separator
-set statusline+=%L   " Total lines
+  "set statusline=%f         " Path to the file
+  "set statusline+=\ -\      " Separator
+  "set statusline+=FileType: " Label
+  "set statusline+=%y        " Filetype of the file
+  "set statusline+=%{fugitive#statusline()} " which branch
+  "set statusline+=(%2v)%4l   " Current line
+  ""set statusline=%04l
+  ""set statusline=%-4l
+  "set statusline+=/    " Separator
+  "set statusline+=%L   " Total lines
 "}}}
 
 "{{{leader
@@ -147,6 +137,12 @@ nnoremap <localleader>sv :source $MYVIMRC<cr>
 nnoremap <localleader>ft :execute 'set ft=' . &filetype<cr>
 nnoremap <localleader>s% :source %<cr>
 "}}}
+"{{{statusline
+Plugin 'bling/vim-airline' 
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#left_sep = ' '
+"let g:airline#extensions#tabline#left_alt_sep = '|'
+"}}}
 Plugin 'ervandew/supertab'
 Plugin 'tomtom/tlib_vim' " This library provides some utility functions
 Plugin 'klen/rope-vim'
@@ -155,6 +151,26 @@ Plugin 'marcweber/vim-addon-manager'
 Plugin 'marcweber/vim-addon-mw-utils'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Raimondi/delimitMate'
+"{{{color scheme
+try
+    colorscheme desert
+catch
+endtry
+if has("gui_running")
+    set guioptions-=T
+    set guioptions-=e
+    set t_Co=256
+    set guitablabel=%M\ %t
+endif
+"Plugin 'altercation/vim-colors-solarized' " color scheme
+"if has('gui_running')
+    "set background=light
+"else
+    "set background=dark
+"endif
+"colorscheme solarized
+"}}}
+
 "{{{ultisnips
 Plugin 'sirver/ultisnips'
 

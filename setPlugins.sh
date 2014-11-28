@@ -8,3 +8,4 @@ fi
 #jslint(http://github.com/hallettj/jslint.vim)
 sudo apt install rhino npm
 sudo npm install -g jshint
+sudo pip install vim_bridge
