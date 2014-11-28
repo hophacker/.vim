@@ -10,8 +10,8 @@ augroup END
 "}}}
 "clang_complete{{{
 Plugin 'Rip-Rip/clang_complete'
-let g:clang_library_path = "/usr/lib/llvm-3.4/lib/"
-let g:clang_library_file = "libclang.so.1"
+let g:clang_library_path = "/usr/local/clang+llvm-3.5.0-x86_64-linux-gnu/lib/"
+let g:clang_library_file = "libclang.so"
 let g:SuperTabDefaultCompletionType = "<C-n>"
 let g:SuperTabContextDefaultCompletionType = '<C-x><C-u>'
 let g:clang_complete_auto = 1
@@ -39,6 +39,9 @@ let g:clang_snippets=1
 let g:clang_conceal_snippets=1
 " The single one that works with clang_complete
 let g:clang_snippets_engine='clang_complete'
+nnoremap <Leader>r :call ClangGetReferences()<CR>
+nnoremap <Leader>d :call ClangGetDeclarations()<CR>
+nnoremap <Leader>s :call ClangGetSubclasses()<CR>
 """}}}
 "cvim{{{
 Plugin 'git://github.com/hophacker/cvim'

@@ -1,5 +1,11 @@
 ﻿# Jie's Vim setup
 
+## Install
+
+### YouCompleteMe
+*  [Install](http://www.alexeyshmalko.com/2014/youcompleteme-ultimate-autocomplete-plugin-for-vim/)
+* After installed run `./install.sh --clang-completer --system-clang --system-boost
+` to get semantic support for C-family languages
 ## Vim Usage
 
 ###Buffer

@@ -82,6 +82,8 @@ set statusline+=%L   " Total lines
 "{{{leader
 let mapleader = ","
 let g:mapleader = ","
+nm <leader>lm :marks<cr>
+nm <silent><Leader><C-]> <C-w><C-]><C-w>T
 nmap <leader>w :w!<cr>
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 "spell checking{{{
@@ -178,10 +180,13 @@ execute pathogen#helptags()
 "}}}
 "{{{code completion, complete
 Plugin 'Valloric/YouCompleteMe'
-" These are the tweaks I apply to YCM's config, you don't need them but they might help.
-" YCM gives you popups and splits by default that some people might not like, so these should tidy it up a bit for you.
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
 let g:ycm_add_preview_to_completeopt=0
 let g:ycm_confirm_extra_conf=0
+let g:ycm_server_use_vim_stdout = 1 
+let g:ycm_server_log_level = 'debug'
 set completeopt-=preview
 "}}}
 "{{{snipmate snippets
@@ -198,7 +203,7 @@ let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 "}}}
 "scrooloose/nerdtree{{{
 Plugin 'scrooloose/nerdtree'
-map <localleader>N :NERDTreeToggle<CR>
+map <localleader>nt :NERDTreeToggle<CR>
 "autocmd vimenter * NERDTree
 "}}}
 "{{{latex tex
@@ -233,6 +238,7 @@ augroup END
 source ~/.vim/python.vim
 source ~/.vim/js.vim
 source ~/.vim/html.vim
+source ~/.vim/c.vim
 "D language {{{
 "let g:dcd_path=['/home/john/DCD/']
 let g:dcd_importPath=['/home/john/programming/D/','/usr/include/dmd/druntime/import']
