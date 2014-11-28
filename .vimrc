@@ -1,6 +1,7 @@
 "Jie Feng's .vimrc, jiefeng.hopkins@gmail.com
 source ~/.vim/functions.vim
 "settings{{{
+
 filetype plugin indent on
 filetype plugin indent on
 set number
@@ -307,8 +308,8 @@ let g:syntastic_enable_signs=1
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 Plugin 'kien/ctrlp.vim'
-nnoremap <C-A-b> :CtrlPBuffer<cr>
-let g:ctrlp_working_path_mode = 'ra'
+nnoremap  <leader>b :CtrlPBuffer<cr>
+let g:ctrlp_working_path_mode = 'c'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
