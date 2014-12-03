@@ -71,8 +71,9 @@ endif
 "}}}
 
 "{{{leader
-let mapleader = ","
-let g:mapleader = ","
+let mapleader = "\\"
+let g:mapleader = "\\"
+nm <leader>cf m'gg=G`'
 nm <leader>lm :marks<cr>
 nm <silent><Leader><C-]> <C-w><C-]><C-w>T
 nmap <leader>w :w!<cr>
@@ -83,6 +84,13 @@ map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
+"}}}
+"edit .vimrc and refresh{{{
+nnoremap <leader>ia mzgg=G`z
+nnoremap <leader>rf :e<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>ft :execute 'set ft=' . &filetype<cr>
+nnoremap <leader>s% :source %<cr>
 "}}}
 "tabs management{{{
 map <leader>tn :tabnew<cr>
@@ -101,8 +109,8 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 map <leader>md :tabe ~/buffer.md<cr>
 "}}}
 "{{{localleader
-let maplocalleader = "\\"
-let g:maplocalleader = "\\"
+let maplocalleader = ","
+let g:maplocalleader = ","
 "}}}
 
 "{{{editing
@@ -129,13 +137,6 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 Plugin 'gmarik/vundle'
-"}}}
-"edit .vimrc and refresh{{{
-nnoremap <localleader>ia mzgg=G`z
-nnoremap <localleader>rf :e<cr>
-nnoremap <localleader>sv :source $MYVIMRC<cr>
-nnoremap <localleader>ft :execute 'set ft=' . &filetype<cr>
-nnoremap <localleader>s% :source %<cr>
 "}}}
 "{{{statusline
 Plugin 'bling/vim-airline' 
@@ -187,6 +188,7 @@ Plugin 'sjl/gundo.vim'
 map <localleader>g :GundoToggle<CR>
 "}}}
 Plugin 'tpope/vim-fugitive'
+Plugin 'godlygeek/tabular'
 Plugin 'vim-scripts/VimLite'
 Plugin 'L9' "provides some utility functions and commands for programming in Vim
 "pathogen"{{{
@@ -288,14 +290,14 @@ Plugin 'TaskList.vim'
 map <localleader>td <Plug>TaskList
 "}}}
 "{{{git github markdown
-Plugin 'tpope/vim-git'
-"markdown{{{
+Plugin 'plasticboy/vim-markdown'
+Plugin 'greyblake/vim-preview'
 augroup filetype_markdown
     autocmd!
-    autocmd FileType markdown set spell
-    autocmd FileType markdown nnoremap <F8> :!./commit.sh<cr>
+    autocmd FileType mkd setlocal spell
+    autocmd FileType mkd setlocal sw=4 ts=4
+    let g:vim_markdown_initial_foldlevel=1
 augroup END
-"}}}
 "}}}
 "{{{code beautify
 Plugin 'einars/js-beautify'
@@ -305,6 +307,7 @@ autocmd FileType eruby noremap <buffer> <localleader>bb :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <localleader>bb :call CSSBeautify()<cr>
 "}}}
 "{{{vimscript
+Plugin 'tpope/vim-git'
 Plugin 'vim-support'
 augroup filetype_vimscript
     autocmd!
@@ -355,8 +358,8 @@ filetype plugin indent on    " required
 "}}}
 "plugins{{{
 "highlight errors {{{
-nnoremap <leader>w :match Error /\v +$/<cr>
-nnoremap <leader>W :match none<cr>k}}}
+"nnoremap <leader>w :match Error /\v +$/<cr>
+"nnoremap <leader>W :match none<cr>k}}}
 "abbreviations {{{
 iabbrev "- "----------------------------
 iabbrev mysig -- <cr>Jie Feng<cr>jokerfeng2010@gmai.com
@@ -405,9 +408,9 @@ augroup END
 "}}}
 "{{{handy shortcuts
 "edit file{{{
-nmap <localleader>ev :tabedit $MYVIMRC<cr>'tzo
-nmap <localleader>em :tabedit makefile
-nmap <localleader>ej :tabedit ~/.jshintrc<cr>'tzo
+nmap <leader>ev :tabedit $MYVIMRC<cr>'tzo
+nmap <leader>em :tabedit makefile
+nmap <leader>ej :tabedit ~/.jshintrc<cr>'tzo
 "}}}
 "{{{search shortcuts
 "nnoremap / /\v
