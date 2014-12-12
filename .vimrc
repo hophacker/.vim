@@ -1,7 +1,6 @@
 "Jie Feng's .vimrc, jiefeng.hopkins@gmail.com
 source ~/.vim/functions.vim
 "settings{{{
-
 filetype plugin indent on
 filetype plugin indent on
 set number
@@ -15,6 +14,7 @@ set cmdheight=1
 set encoding=utf8
 set tags=tags
 syntax enable 
+nnoremap Q <nop>
 "}}}
 "{{{line break
 set lbr 
@@ -55,26 +55,31 @@ if has('mouse')
   set mouse=a
 endif
 "}}}
-"statusline{{{
-"set statusline=%F          fullpath
-"set statusline=%.20F       change the maximum width
-  "set statusline=%f         " Path to the file
-  "set statusline+=\ -\      " Separator
-  "set statusline+=FileType: " Label
-  "set statusline+=%y        " Filetype of the file
-  "set statusline+=%{fugitive#statusline()} " which branch
-  "set statusline+=(%2v)%4l   " Current line
-  ""set statusline=%04l
-  ""set statusline=%-4l
-  "set statusline+=/    " Separator
-  "set statusline+=%L   " Total lines
+"{{{color scheme
+try
+    colorscheme desert
+catch
+endtry
+if has("gui_running")
+    set guioptions-=T
+    set guioptions-=e
+    set t_Co=256
+    set guitablabel=%M\ %t
+endif
+"Plugin 'altercation/vim-colors-solarized' " color scheme
+"if has('gui_running')
+    "set background=light
+"else
+    "set background=dark
+"endif
+"colorscheme solarized
 "}}}
-
 "{{{leader
 let mapleader = "\\"
 let g:mapleader = "\\"
 nm <leader>cf m'gg=G`'
 nm <leader>lm :marks<cr>
+nm <leader>P :InstantMarkdownPreview<cr>
 nm <silent><Leader><C-]> <C-w><C-]><C-w>T
 nmap <leader>w :w!<cr>
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
@@ -112,10 +117,6 @@ map <leader>md :tabe ~/buffer.md<cr>
 let maplocalleader = ","
 let g:maplocalleader = ","
 "}}}
-
-"{{{editing
-"}}}
-nnoremap Q <nop>
 "{{{tab completion and documentation
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
@@ -130,7 +131,6 @@ nnoremap <c-h> gT
 inoremap <c-l> <esc>gt
 inoremap <c-h> <esc>gT
 "}}}
-
 "vundle begin{{{
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -153,33 +153,11 @@ Plugin 'marcweber/vim-addon-manager'
 Plugin 'marcweber/vim-addon-mw-utils'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Raimondi/delimitMate'
-"{{{color scheme
-try
-    colorscheme desert
-catch
-endtry
-if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-endif
-"Plugin 'altercation/vim-colors-solarized' " color scheme
-"if has('gui_running')
-    "set background=light
-"else
-    "set background=dark
-"endif
-"colorscheme solarized
-"}}}
-
 "{{{ultisnips
 Plugin 'sirver/ultisnips'
-
 let g:UltiSnipsExpandTrigger="<C-e>"
 let g:UltiSnipsJumpForwardTrigger="<C-x C-n>"
 let g:UltiSnipsJumpBackwardTrigger="<C-x C-p>"
-
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 "}}}
@@ -291,11 +269,16 @@ map <localleader>td <Plug>TaskList
 "}}}
 "{{{git github markdown
 Plugin 'plasticboy/vim-markdown'
-Plugin 'greyblake/vim-preview'
+"Plugin 'greyblake/vim-preview'
+Plugin 'suan/vim-instant-markdown' "{{{
+let g:instant_markdown_slow = 1
+let g:instant_markdown_autostart = 1
+"}}}
 augroup filetype_markdown
     autocmd!
     autocmd FileType mkd setlocal spell
     autocmd FileType mkd setlocal sw=4 ts=4
+    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
     let g:vim_markdown_initial_foldlevel=1
 augroup END
 "}}}
