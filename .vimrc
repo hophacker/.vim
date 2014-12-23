@@ -79,7 +79,7 @@ let mapleader = "\\"
 let g:mapleader = "\\"
 nm <leader>cf m'gg=G`'
 nm <leader>lm :marks<cr>
-nm <leader>P :InstantMarkdownPreview<cr>
+"nm <leader>P :InstantMarkdownPreview<cr>
 nm <silent><Leader><C-]> <C-w><C-]><C-w>T
 nmap <leader>w :w!<cr>
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
@@ -110,6 +110,8 @@ au TabLeave * let g:lasttab = tabpagenr()
     "Opens a new tab with the current buffer's path
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 "}}}
+nnoremap <leader>/ :nohlsearch<cr>
+nnoremap <leader>h :set hlsearch!<cr>
 "Toggle paste mode on and off
 map <leader>md :tabe ~/buffer.md<cr>
 "}}}
@@ -277,7 +279,7 @@ let g:instant_markdown_autostart = 1
 augroup filetype_markdown
     autocmd!
     autocmd FileType mkd setlocal spell
-    autocmd FileType mkd setlocal sw=4 ts=4
+    autocmd FileType mkd setlocal sw=2 ts=2
     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
     let g:vim_markdown_initial_foldlevel=1
 augroup END
@@ -397,8 +399,6 @@ nmap <leader>ej :tabedit ~/.jshintrc<cr>'tzo
 "}}}
 "{{{search shortcuts
 "nnoremap / /\v
-nnoremap <leader>/ :nohlsearch<cr>
-nnoremap <localleader>h :set hlsearch!<cr>
 noremap ;; :%s:::g<Left><Left><Left>
 noremap ;' :%s:::cg<Left><Left><Left><Left>
 "}}}
