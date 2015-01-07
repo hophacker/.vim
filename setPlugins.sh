@@ -6,6 +6,15 @@ then
 fi
 
 #jslint(http://github.com/hallettj/jslint.vim)
-sudo apt install rhino npm
+
+
+if [ "$(uname)" == "Darwin" ]; then
+  installCMD="brew"
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+  installCMD="sudo apt"
+elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
+  echo hey
+fi
+$installCMD install rhino npm
 sudo npm install -g jshint
 sudo pip install vim_bridge

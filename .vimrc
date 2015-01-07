@@ -179,15 +179,16 @@ execute pathogen#infect()
 execute pathogen#helptags()
 "}}}
 "{{{code completion, complete
-Plugin 'Valloric/YouCompleteMe'
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
-let g:ycm_add_preview_to_completeopt=0
-let g:ycm_confirm_extra_conf=0
-let g:ycm_server_use_vim_stdout = 1 
-let g:ycm_server_log_level = 'debug'
-set completeopt-=preview
+"Plugin 'Valloric/YouCompleteMe'
+"let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+"let g:ycm_key_list_select_completion=[]
+"let g:ycm_key_list_previous_completion=[]
+"let g:ycm_add_preview_to_completeopt=0
+"let g:ycm_confirm_extra_conf=0
+"let g:ycm_server_use_vim_stdout = 1 
+"let g:ycm_server_log_level = 'debug'
+"let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+"set completeopt-=preview
 "}}}
 "{{{snipmate snippets
 "Plugin 'garbas/vim-snipmate'
