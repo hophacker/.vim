@@ -79,9 +79,10 @@ let mapleader = "\\"
 let g:mapleader = "\\"
 nm <leader>cf m'gg=G`'
 nm <leader>lm :marks<cr>
-"nm <leader>P :InstantMarkdownPreview<cr>
+nm <leader>P :InstantMarkdownPreview<cr>
 nm <silent><Leader><C-]> <C-w><C-]><C-w>T
 nmap <leader>w :w!<cr>
+nmap <leader>tf <c-w>gf
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 "spell checking{{{
 noremap <leader>ss :call SpellCheck()<cr>
@@ -285,6 +286,7 @@ augroup filetype_markdown
     let g:vim_markdown_initial_foldlevel=1
 augroup END
 "}}}
+Plugin 'mxw/vim-jsx'
 "{{{code beautify
 Plugin 'einars/js-beautify'
 autocmd FileType javascript noremap <buffer>  <localleader>bb :call JsBeautify()<cr>
