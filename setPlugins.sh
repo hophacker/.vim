@@ -15,6 +15,6 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
   echo hey
 fi
-$installCMD install rhino npm
+$installCMD install rhino
 sudo npm install -g jshint
 sudo pip install vim_bridge

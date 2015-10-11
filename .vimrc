@@ -4,6 +4,7 @@ source ~/.vim/functions.vim
 filetype plugin indent on
 filetype plugin indent on
 set number
+set autochdir
 set ts=2
 set sw=2
 set history=700
@@ -13,6 +14,8 @@ set so=5 "set 5 lines to the cursor
 set cmdheight=1
 set encoding=utf8
 set tags=tags
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.cache     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 syntax enable 
 nnoremap Q <nop>
 "}}}
@@ -205,7 +208,7 @@ let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 "}}}
 "scrooloose/nerdtree{{{
 Plugin 'scrooloose/nerdtree'
-map <localleader>nt :NERDTreeToggle<CR>
+map <F5> :NERDTreeToggle<CR>
 "autocmd vimenter * NERDTree
 "}}}
 "{{{latex tex
@@ -275,7 +278,7 @@ map <localleader>td <Plug>TaskList
 Plugin 'plasticboy/vim-markdown'
 "Plugin 'greyblake/vim-preview'
 Plugin 'suan/vim-instant-markdown' "{{{
-let g:instant_markdown_slow = 1
+let g:instant_markdown_slow = 0
 let g:instant_markdown_autostart = 1
 "}}}
 augroup filetype_markdown
@@ -303,28 +306,16 @@ augroup filetype_vimscript
     autocmd FileType vim let g:foldlevel=1
 augroup END 
 "}}}
-"scrooloose/syntastic{{{
-"syntax checking plugin
-"Plugin 'scrooloose/syntastic'
-let g:syntastic_disabled_filetypes=['javascript', 'js']
-let g:syntastic_cpp_compiler_options = ' -std=c++11'
-let g:syntastic_jslint_checkers=['jshint']
-let g:syntastic_check_on_open=1
-let g:syntastic_enable_signs=1
-"}}}
 "{{{ctrlp
+Plugin 'kien/ctrlp.vim'
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
-Plugin 'kien/ctrlp.vim'
 nnoremap  <leader>b :CtrlPBuffer<cr>
-let g:ctrlp_working_path_mode = 'c'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
+  \ 'file': '\v\.(exe|so|dll|cache)$'
   \ }
-let g:ctrlp_user_command = 'find %s -type f'
 "}}}
 "{{{FuzzyFinder
 "Plugin 'FuzzyFinder'

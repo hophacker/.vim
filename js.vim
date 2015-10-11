@@ -9,7 +9,7 @@ Plugin 'jQuery'
 Plugin 'moll/vim-node'
 "jshint2
 Plugin 'Shutnik/jshint2.vim'
-let jshint2_read = 1
+let jshint2_read = 0
 let jshint2_save = 1
 let jshint2_close = 0
 let jshint2_confirm = 0
