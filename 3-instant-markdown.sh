@@ -1,3 +1,5 @@
 #!/bin/bash - 
 set -o nounset                              # Treat unset variables as an error
-sudo pip install flake8 nose mock pyhamcrest
+gem install pygments.rb
+gem install redcarpet -v 2.3.0
+npm -g install instant-markdown-d

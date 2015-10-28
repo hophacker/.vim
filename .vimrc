@@ -153,6 +153,7 @@ Plugin 'bling/vim-airline'
 Plugin 'ervandew/supertab'
 Plugin 'tomtom/tlib_vim' " This library provides some utility functions
 Plugin 'klen/rope-vim'
+Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'marcweber/vim-addon-manager'

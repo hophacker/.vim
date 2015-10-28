@@ -1,13 +1,4 @@
-#!/bin/bash - 
-set -o nounset                              # Treat unset variables as an error
-if [[ ! -e bundle/vundle ]] 
-then
-    git clone https://github.com/gmarik/Vundle.vim bundle/vundle
-fi
-
 #jslint(http://github.com/hallettj/jslint.vim)
-
-
 if [ "$(uname)" == "Darwin" ]; then
   installCMD="brew"
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
