@@ -2,3 +2,4 @@ bundle/*
 !bundle/after-install.sh
 vimmaps
 node_modules/*
+*.swp
