@@ -1,4 +1,5 @@
-#jslint(http://github.com/hallettj/jslint.vim)
+#!/bin/bash
+#jslint(http://github.com/hallettj/jslint.vim
 if [ "$(uname)" == "Darwin" ]; then
   installCMD="brew"
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
