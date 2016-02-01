@@ -155,7 +155,6 @@ Plugin 'tomtom/tlib_vim' " This library provides some utility functions
 Plugin 'klen/rope-vim'
 Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'derekwyatt/vim-scala'
 Plugin 'marcweber/vim-addon-manager'
 Plugin 'marcweber/vim-addon-mw-utils'
 Plugin 'scrooloose/nerdcommenter'
@@ -174,8 +173,6 @@ map <localleader>g :GundoToggle<CR>
 "}}}
 Plugin 'tpope/vim-fugitive'
 Plugin 'godlygeek/tabular'
-Plugin 'vim-scripts/VimLite'
-Plugin 'L9' "provides some utility functions and commands for programming in Vim
 "pathogen"{{{
 Plugin 'tpope/vim-pathogen'
 set laststatus=2
@@ -212,20 +209,6 @@ Plugin 'scrooloose/nerdtree'
 map <F5> :NERDTreeToggle<CR>
 "autocmd vimenter * NERDTree
 "}}}
-"{{{latex tex
-Plugin 'latex-support.vim'
-Plugin 'jcf/vim-latex'
-augroup filetype_tex
-    autocmd!
-    autocmd FileType tex nnoremap <leader>cp :execute "!cp %:r.pdf  ~/Desktop/resume.pdf -f"<cr>
-    autocmd FileType tex nnoremap <F9> :SCCompile<cr>
-    autocmd FileType tex nnoremap <F10> :SCCompileRun<cr>
-    autocmd FileType tex nnoremap <F7> :execute "set ft=text"<cr>
-    autocmd FileType tex set textwidth=120
-    autocmd FileType tex nnoremap <F6> :execute "!evince " . expand('%:r').".pdf &" <cr>
-    autocmd FileType tex nnoremap <F8> g<C-g>
-augroup END
-"}}}
 "{{{ruby rails
 Plugin 'tpope/vim-rails.git'
 Plugin 'vim-ruby/vim-ruby'
@@ -244,11 +227,6 @@ augroup END
 source ~/.vim/python.vim
 source ~/.vim/js.vim
 source ~/.vim/html.vim
-source ~/.vim/c.vim
-"D language {{{
-"let g:dcd_path=['/home/john/DCD/']
-let g:dcd_importPath=['/home/john/programming/D/','/usr/include/dmd/druntime/import']
-"}}}
 "{{{perl awk bash
 Plugin 'vim-perl/vim-perl'
 Plugin 'vim-scripts/awk.vim'

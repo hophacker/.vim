@@ -1,4 +1,9 @@
 Plugin 'Hackerpilot/DCD'
+source ~/.vim/c.vim
+"D language {{{
+"let g:dcd_path=['/home/john/DCD/']
+let g:dcd_importPath=['/home/john/programming/D/','/usr/include/dmd/druntime/import']
+"}}}
 "c/cpp filetype{{{
 augroup filetype_c_cpp
     autocmd!
