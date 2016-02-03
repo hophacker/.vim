@@ -1,28 +1,9 @@
 "indentation
 Plugin 'nathanaelkane/vim-indent-guides'
-"Plugin 'sleistner/vim-jshint'
-"Plugin 'walm/jshint.vim'
-"Plugin 'wookiehangover/jshint.vim'
-let g:JSHintHighlightErrorLine = 1
 Plugin 'marijnh/tern_for_vim'
-Plugin 'jQuery'
 Plugin 'moll/vim-node'
 "jshint2
 Plugin 'Shutnik/jshint2.vim'
-let jshint2_read = 0
-let jshint2_save = 1
-let jshint2_close = 0
-let jshint2_confirm = 0
-let jshint2_color = 1
-let jshint2_height = 2
-":JSHint {file}
-"o to open in new window
-"go to preview file (open but maintain focus on jshint results)
-"q to close the quickfix window
-"jslint
-"Plugin 'hallettj/jslint.vim'
-":JSLintUpdate
-":JSLintToggle
 "{{{vim-javascript
 Plugin 'pangloss/vim-javascript'
 let javascript_enable_domhtmlcss = 0
@@ -35,3 +16,25 @@ augroup filetype_javascript
     autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
     autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
 augroup END
+
+nnoremap <silent> <leader>e :call JSFormat()<cr>
+
+function! JSFormat()
+  " Preparation: save last search, and cursor position.
+  let l:win_view = winsaveview()
+  let l:last_search = getreg('/')
+  let fileWorkingDirectory = expand('%:p:h')
+  let currentWorkingDirectory = getcwd()
+  execute ':lcd' . fileWorkingDirectory
+  execute ':silent' . '%!esformatter'
+  if v:shell_error
+    undo
+    "echo "esformatter error, using builtin vim formatter"
+    " use internal formatting command
+    execute ":silent normal! gg=G<cr>"
+  endif
+  " Clean up: restore previous search history, and cursor position
+  execute ':lcd' . currentWorkingDirectory
+  call winrestview(l:win_view)
+  call setreg('/', l:last_search)
+endfunction

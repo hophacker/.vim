@@ -144,6 +144,23 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 Plugin 'gmarik/vundle'
 "}}}
+Plugin 'easymotion/vim-easymotion' "{{{
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+"}}}
 "{{{statusline
 Plugin 'bling/vim-airline' 
 "let g:airline#extensions#tabline#enabled = 1
@@ -154,7 +171,6 @@ Plugin 'ervandew/supertab'
 Plugin 'tomtom/tlib_vim' " This library provides some utility functions
 Plugin 'klen/rope-vim'
 Plugin 'evanmiller/nginx-vim-syntax'
-Plugin 'Lokaltog/vim-easymotion'
 Plugin 'marcweber/vim-addon-manager'
 Plugin 'marcweber/vim-addon-mw-utils'
 Plugin 'scrooloose/nerdcommenter'
@@ -269,6 +285,8 @@ augroup filetype_markdown
 augroup END
 "}}}
 Plugin 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
+"let g:jsx_pragma_required = 1
 "{{{code beautify
 Plugin 'einars/js-beautify'
 autocmd FileType javascript noremap <buffer>  <localleader>bb :call JsBeautify()<cr>
@@ -290,6 +308,7 @@ Plugin 'kien/ctrlp.vim'
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 nnoremap  <leader>b :CtrlPBuffer<cr>
+nnoremap  <leader>m :CtrlPMRUFiles<cr>
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
