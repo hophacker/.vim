@@ -3,6 +3,7 @@ source ~/.vim/functions.vim
 "settings{{{
 filetype plugin indent on
 filetype plugin indent on
+set autoread
 set number
 set autochdir
 set ts=2
@@ -39,6 +40,12 @@ set smartcase
 set nobackup 
 set nowb
 set noswapfile
+"}}}
+"Habit breaking {{{
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
 "}}}
 " Specify the behavior when switching between buffers {{{
 try
@@ -196,8 +203,12 @@ set nocp
 execute pathogen#infect()
 execute pathogen#helptags()
 "}}}
+"
 "{{{code completion, complete
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'ternjs/tern_for_vim'
+noremap <leader>tr :TernRename<CR>
+noremap <leader>ttr :TernRefs<CR>
+Plugin 'Valloric/YouCompleteMe'
 "let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 "let g:ycm_key_list_select_completion=[]
 "let g:ycm_key_list_previous_completion=[]
@@ -222,7 +233,9 @@ let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 "}}}
 "scrooloose/nerdtree{{{
 Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
 map <F5> :NERDTreeToggle<CR>
+map <F6> :NERDTreeTabsToggle<CR>
 "autocmd vimenter * NERDTree
 "}}}
 "{{{ruby rails
@@ -260,11 +273,6 @@ let g:BASH_Company      = 'The Johns Hopkins'
 Plugin 'majutsushi/tagbar'
 nmap <F4> :TagbarToggle<CR>
 "}}}
-"{{{SingleCompile
-Plugin 'xuhdev/SingleCompile'
-nmap <F9> :SCCompile<cr> 
-nmap <F10> :SCCompileRun<cr> 
-"}}}
 "taskList{{{
 Plugin 'TaskList.vim'
 map <localleader>td <Plug>TaskList
@@ -285,6 +293,10 @@ augroup filetype_markdown
 augroup END
 "}}}
 Plugin 'mxw/vim-jsx'
+Plugin 'gcmt/taboo.vim'
+Plugin 'dkprice/vim-easygrep'
+nmap <leader>tt :TabooRename 
+
 let g:jsx_ext_required = 0
 "let g:jsx_pragma_required = 1
 "{{{code beautify
@@ -304,7 +316,8 @@ augroup filetype_vimscript
 augroup END 
 "}}}
 "{{{ctrlp
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_show_hidden = 1
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 nnoremap  <leader>b :CtrlPBuffer<cr>
@@ -314,12 +327,6 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll|cache)$'
   \ }
-"}}}
-"{{{FuzzyFinder
-"Plugin 'FuzzyFinder'
-"nmap <localleader>f :FufFileWithCurrentBufferDir<CR>
-"nmap <localleader>b :FufBuffer<CR>
-"nmap <localleader>t :FufTaggedFile<CR>
 "}}}
 " run and compile {{{
 " nnoremap <F9> :SCCompile<cr>
@@ -413,3 +420,15 @@ nnoremap <C-X><C-V> "+p
 "autocmd BufWritePost .vimrc :source ~/.vimrc
 "}}}
 "}}}
+" The Silver Searcher {{{
+Plugin 'rking/ag.vim'
+let g:ag_working_path_mode="r"
+nnoremap <leader>aw :Ag <C-R><C-W><CR>
+vnoremap <leader>as <esc>:Ag <C-R>*<CR>
+nnoremap <leader>ag :Ag<SPACE>
+"}}}
+Plugin 'xolox/vim-misc'
+"tab management {{{
+Plugin 'xolox/vim-session'
+"}}}
+Plugin 'gorodinskiy/vim-coloresque'

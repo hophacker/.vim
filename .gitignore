@@ -3,3 +3,4 @@ bundle/*
 vimmaps
 node_modules/*
 *.swp
+sessions/

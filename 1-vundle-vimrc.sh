@@ -8,7 +8,7 @@ then
 fi
 
 VIMRC=$HOME/.vimrc
-if [[ -e $VIMRC ]] 
+if [[ -e "$VIMRC" ]] 
 then
   rm $VIMRC
 fi

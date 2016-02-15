@@ -8,5 +8,5 @@ elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
   echo hey
 fi
 $installCMD install rhino
-sudo npm install -g jshint
+sudo npm install -g jshint tern
 sudo pip install vim_bridge

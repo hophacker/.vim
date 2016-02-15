@@ -1,6 +1,5 @@
 "indentation
 Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'marijnh/tern_for_vim'
 Plugin 'moll/vim-node'
 "jshint2
 Plugin 'Shutnik/jshint2.vim'
