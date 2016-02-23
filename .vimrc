@@ -208,6 +208,7 @@ execute pathogen#helptags()
 Plugin 'ternjs/tern_for_vim'
 noremap <leader>tr :TernRename<CR>
 noremap <leader>ttr :TernRefs<CR>
+noremap <leader>td :TernDef<CR>
 Plugin 'Valloric/YouCompleteMe'
 "let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 "let g:ycm_key_list_select_completion=[]
@@ -430,5 +431,6 @@ nnoremap <leader>ag :Ag<SPACE>
 Plugin 'xolox/vim-misc'
 "tab management {{{
 Plugin 'xolox/vim-session'
+let g:session_autosave = 'no'
 "}}}
 Plugin 'gorodinskiy/vim-coloresque'
