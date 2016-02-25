@@ -1,0 +1,28 @@
+snippet react "React template" b
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+
+class ${1:C} extends Component {
+  static propTypes = {
+  };
+
+  render () {
+  }
+}
+
+export default connect((state, ownProps) => {
+  return {
+  }
+})($1)
+endsnippet
+
+snippet TODO "Javascript Todo" b
+// TODO: ${1:desc} `echo $USER` `!v strftime("%c")` ${2}
+endsnippet
+
+snippet connect "react redux connect" b
+export default connect((state, ownProps) => {
+  return {
+  }
+})($1)
+endsnippet

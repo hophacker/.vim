@@ -184,9 +184,9 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'Raimondi/delimitMate'
 "{{{ultisnips
 Plugin 'sirver/ultisnips'
-let g:UltiSnipsExpandTrigger="<C-e>"
-let g:UltiSnipsJumpForwardTrigger="<C-x C-n>"
-let g:UltiSnipsJumpBackwardTrigger="<C-x C-p>"
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 "}}}
@@ -223,10 +223,6 @@ Plugin 'Valloric/YouCompleteMe'
 "{{{snipmate snippets
 "Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-imap <C-J> <Plug>snipMateNextOrTrigger
-smap <C-J> <Plug>snipMateNextOrTrigger
-imap <C-K> <Plug>snipMateBack
-smap <C-K> <Plug>snipMateBack
 imap <C-L> <Plug>snipMateShow
 let g:snipMate = {}
 let g:snipMate.scope_aliases = {}
