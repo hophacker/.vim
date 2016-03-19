@@ -1,6 +1,7 @@
 "indentation
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'moll/vim-node'
+Plugin 'hophacker/tagman.vim'
 "jshint2
 Plugin 'Shutnik/jshint2.vim'
 "{{{vim-javascript

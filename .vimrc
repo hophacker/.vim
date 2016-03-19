@@ -3,6 +3,7 @@ source ~/.vim/functions.vim
 "settings{{{
 filetype plugin indent on
 filetype plugin indent on
+set relativenumber
 set autoread
 set number
 set autochdir
@@ -419,7 +420,8 @@ nnoremap <C-X><C-V> "+p
 "}}}
 " The Silver Searcher {{{
 Plugin 'rking/ag.vim'
-let g:ag_working_path_mode="r"
+let g:ag_working_path_mode='r'
+let g:ag_highlight=1
 nnoremap <leader>aw :Ag <C-R><C-W><CR>
 vnoremap <leader>as <esc>:Ag <C-R>*<CR>
 nnoremap <leader>ag :Ag<SPACE>
@@ -428,5 +430,6 @@ Plugin 'xolox/vim-misc'
 "tab management {{{
 Plugin 'xolox/vim-session'
 let g:session_autosave = 'no'
+let g:session_autoload = 'no'
 "}}}
 Plugin 'gorodinskiy/vim-coloresque'
