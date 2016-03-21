@@ -433,3 +433,4 @@ let g:session_autosave = 'no'
 let g:session_autoload = 'no'
 "}}}
 Plugin 'gorodinskiy/vim-coloresque'
+Plugin 'editorconfig/editorconfig-vim'
