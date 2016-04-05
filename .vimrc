@@ -233,7 +233,7 @@ map <F6> :NERDTreeTabsToggle<CR>
 "autocmd vimenter * NERDTree
 "}}}
 "{{{ruby rails
-Plug 'tpope/vim-rails.git'
+Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
 augroup filetype_ruby
     autocmd!
@@ -289,6 +289,7 @@ augroup END
 Plug 'mxw/vim-jsx'
 Plug 'gcmt/taboo.vim'
 Plug 'dkprice/vim-easygrep'
+Plug 'lervag/vimtex'
 nmap <leader>tt :TabooRename 
 
 let g:jsx_ext_required = 0

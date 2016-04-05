@@ -1,5 +1,4 @@
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'} "writing html faster
-Plug 'slim-template/vim-slim.git'
 Plug 'tpope/vim-haml'
 Plug 'mattn/emmet-vim'
 augroup filetype_html
