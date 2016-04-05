@@ -1,7 +1,7 @@
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'} "writing html faster
-Plugin 'slim-template/vim-slim.git'
-Plugin 'tpope/vim-haml'
-Plugin 'mattn/emmet-vim'
+Plug 'rstacruz/sparkup', {'rtp': 'vim/'} "writing html faster
+Plug 'slim-template/vim-slim.git'
+Plug 'tpope/vim-haml'
+Plug 'mattn/emmet-vim'
 augroup filetype_html
     autocmd!
     "autocmd FileType html setlocal indentkeys-=*<Return>

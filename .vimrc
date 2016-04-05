@@ -1,4 +1,5 @@
 "Jie Feng's .vimrc, jiefeng.hopkins@gmail.com
+call plug#begin('~/.vim/plugged')
 source ~/.vim/functions.vim
 "settings{{{
 filetype plugin indent on
@@ -145,14 +146,7 @@ nnoremap <c-h> gT
 inoremap <c-l> <esc>gt
 inoremap <c-h> <esc>gT
 "}}}
-"vundle begin{{{
-set nocompatible              " be iMproved, required
-filetype off                  " required
-set rtp+=~/.vim/bundle/vundle/
-call vundle#begin()
-Plugin 'gmarik/vundle'
-"}}}
-Plugin 'easymotion/vim-easymotion' "{{{
+Plug 'easymotion/vim-easymotion' "{{{
 " <Leader>f{char} to move to {char}
 map  <Leader>f <Plug>(easymotion-bd-f)
 nmap <Leader>f <Plug>(easymotion-overwin-f)
@@ -170,21 +164,21 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 "}}}
 "{{{statusline
-Plugin 'bling/vim-airline' 
+Plug 'bling/vim-airline' 
 "let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#left_sep = ' '
 "let g:airline#extensions#tabline#left_alt_sep = '|'
 "}}}
-Plugin 'ervandew/supertab'
-Plugin 'tomtom/tlib_vim' " This library provides some utility functions
-Plugin 'klen/rope-vim'
-Plugin 'evanmiller/nginx-vim-syntax'
-Plugin 'marcweber/vim-addon-manager'
-Plugin 'marcweber/vim-addon-mw-utils'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'Raimondi/delimitMate'
+Plug 'ervandew/supertab'
+Plug 'tomtom/tlib_vim' " This library provides some utility functions
+Plug 'klen/rope-vim'
+Plug 'evanmiller/nginx-vim-syntax'
+Plug 'marcweber/vim-addon-manager'
+Plug 'marcweber/vim-addon-mw-utils'
+Plug 'scrooloose/nerdcommenter'
+Plug 'Raimondi/delimitMate'
 "{{{ultisnips
-Plugin 'sirver/ultisnips'
+Plug 'sirver/ultisnips'
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
@@ -192,13 +186,13 @@ let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsEditSplit="vertical"
 "}}}
 "{{{gundo
-Plugin 'sjl/gundo.vim'
+Plug 'sjl/gundo.vim'
 map <localleader>g :GundoToggle<CR>
 "}}}
-Plugin 'tpope/vim-fugitive'
-Plugin 'godlygeek/tabular'
+Plug 'tpope/vim-fugitive'
+Plug 'godlygeek/tabular'
 "pathogen"{{{
-Plugin 'tpope/vim-pathogen'
+Plug 'tpope/vim-pathogen'
 set laststatus=2
 set nocp
 execute pathogen#infect()
@@ -206,11 +200,13 @@ execute pathogen#helptags()
 "}}}
 "
 "{{{code completion, complete
-Plugin 'ternjs/tern_for_vim'
+Plug 'ternjs/tern_for_vim'
+let g:tern_show_argument_hints = 'on_hold'
+let g:tern_map_keys = 1
 noremap <leader>tr :TernRename<CR>
 noremap <leader>ttr :TernRefs<CR>
 noremap <leader>td :TernDef<CR>
-Plugin 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 "let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 "let g:ycm_key_list_select_completion=[]
 "let g:ycm_key_list_previous_completion=[]
@@ -223,22 +219,22 @@ Plugin 'Valloric/YouCompleteMe'
 "}}}
 "{{{snipmate snippets
 "Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 imap <C-L> <Plug>snipMateShow
 let g:snipMate = {}
 let g:snipMate.scope_aliases = {}
 let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 "}}}
 "scrooloose/nerdtree{{{
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
 map <F5> :NERDTreeToggle<CR>
 map <F6> :NERDTreeTabsToggle<CR>
 "autocmd vimenter * NERDTree
 "}}}
 "{{{ruby rails
-Plugin 'tpope/vim-rails.git'
-Plugin 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails.git'
+Plug 'vim-ruby/vim-ruby'
 augroup filetype_ruby
     autocmd!
     autocmd FileType ruby set sw=2
@@ -255,9 +251,9 @@ source ~/.vim/python.vim
 source ~/.vim/js.vim
 source ~/.vim/html.vim
 "{{{perl awk bash
-Plugin 'vim-perl/vim-perl'
-Plugin 'vim-scripts/awk.vim'
-Plugin 'vim-scripts/bash-support.vim'
+Plug 'vim-perl/vim-perl'
+Plug 'vim-scripts/awk.vim'
+Plug 'vim-scripts/bash-support.vim'
 augroup filetype_perl
     autocmd!
     autocmd FileType perl noremap <F10> :!perl % <cr>
@@ -268,17 +264,17 @@ let g:BASH_Email        = 'jokerfeng2010@gmail.com'
 let g:BASH_Company      = 'The Johns Hopkins'
 "}}}
 "{{{tagbar
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 nmap <F4> :TagbarToggle<CR>
 "}}}
 "taskList{{{
-Plugin 'TaskList.vim'
+Plug 'TaskList.vim'
 map <localleader>td <Plug>TaskList
 "}}}
 "{{{git github markdown
-Plugin 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown'
 "Plugin 'greyblake/vim-preview'
-Plugin 'suan/vim-instant-markdown' "{{{
+Plug 'suan/vim-instant-markdown' "{{{
 let g:instant_markdown_slow = 0
 let g:instant_markdown_autostart = 1
 "}}}
@@ -290,23 +286,23 @@ augroup filetype_markdown
     let g:vim_markdown_initial_foldlevel=1
 augroup END
 "}}}
-Plugin 'mxw/vim-jsx'
-Plugin 'gcmt/taboo.vim'
-Plugin 'dkprice/vim-easygrep'
+Plug 'mxw/vim-jsx'
+Plug 'gcmt/taboo.vim'
+Plug 'dkprice/vim-easygrep'
 nmap <leader>tt :TabooRename 
 
 let g:jsx_ext_required = 0
 "let g:jsx_pragma_required = 1
 "{{{code beautify
-Plugin 'einars/js-beautify'
+Plug 'einars/js-beautify'
 autocmd FileType javascript noremap <buffer>  <localleader>bb :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer> <localleader>bb :call HtmlBeautify()<cr>
 autocmd FileType eruby noremap <buffer> <localleader>bb :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <localleader>bb :call CSSBeautify()<cr>
 "}}}
 "{{{vimscript
-Plugin 'tpope/vim-git'
-Plugin 'vim-support'
+Plug 'tpope/vim-git'
+Plug 'vim-support'
 augroup filetype_vimscript
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
@@ -314,7 +310,7 @@ augroup filetype_vimscript
 augroup END 
 "}}}
 "{{{ctrlp
-Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -334,10 +330,6 @@ let g:ctrlp_custom_ignore = {
 nnoremap <localleader>run :execute "!%"<CR>
 nnoremap <F12> :execute "!./" .  expand("%:r") . " < in"<cr>
 " }}}
-"vundle end{{{
-call vundle#end()            " required
-filetype plugin indent on    " required
-"}}}
 "plugins{{{
 "highlight errors {{{
 "nnoremap <leader>w :match Error /\v +$/<cr>
@@ -419,18 +411,19 @@ nnoremap <C-X><C-V> "+p
 "}}}
 "}}}
 " The Silver Searcher {{{
-Plugin 'rking/ag.vim'
+Plug 'rking/ag.vim'
 let g:ag_working_path_mode='r'
 let g:ag_highlight=1
 nnoremap <leader>aw :Ag <C-R><C-W><CR>
 vnoremap <leader>as <esc>:Ag <C-R>*<CR>
 nnoremap <leader>ag :Ag<SPACE>
 "}}}
-Plugin 'xolox/vim-misc'
+Plug 'xolox/vim-misc'
 "tab management {{{
-Plugin 'xolox/vim-session'
+Plug 'xolox/vim-session'
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
 "}}}
-Plugin 'gorodinskiy/vim-coloresque'
-Plugin 'editorconfig/editorconfig-vim'
+Plug 'gorodinskiy/vim-coloresque'
+Plug 'editorconfig/editorconfig-vim'
+call plug#end()

@@ -1,8 +1,8 @@
-Plugin 'vim-scripts/pydoc.vim'
-Plugin 'alfredodeza/pytest.vim'
-Plugin 'nvie/vim-pyunit'
+Plug 'vim-scripts/pydoc.vim'
+Plug 'alfredodeza/pytest.vim'
+Plug 'nvie/vim-pyunit'
 "Python-mode{{{
-Plugin 'klen/python-mode'
+Plug 'klen/python-mode'
 " Activate rope
 " Keys:
 " K             Show python docs
@@ -43,7 +43,7 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 " Don't autofold code
 let g:pymode_folding = 0
 "}}}
-Plugin 'nvie/vim-flake8'
+Plug 'nvie/vim-flake8'
 augroup filetype_python
     autocmd!
     "autocmd FileType python set omnifunc=pythoncomplete#Complete

@@ -1,4 +1,5 @@
 bundle/*
+plugged/*
 !bundle/after-install.sh
 vimmaps
 node_modules/*

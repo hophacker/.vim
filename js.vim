@@ -1,11 +1,11 @@
 "indentation
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'moll/vim-node'
-Plugin 'hophacker/tagman.vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'moll/vim-node'
+Plug 'hophacker/tagman.vim'
 "jshint2
-Plugin 'Shutnik/jshint2.vim'
+Plug 'Shutnik/jshint2.vim'
 "{{{vim-javascript
-Plugin 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 let javascript_enable_domhtmlcss = 0
 let javascript_ignore_javaScriptdoc = 0
 let g:javascript_conceal=0
