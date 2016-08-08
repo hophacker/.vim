@@ -177,6 +177,7 @@ Plug 'marcweber/vim-addon-manager'
 Plug 'marcweber/vim-addon-mw-utils'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Raimondi/delimitMate'
+Plug 'derekwyatt/vim-scala'
 "{{{ultisnips
 Plug 'sirver/ultisnips'
 let g:UltiSnipsExpandTrigger="<C-j>"
@@ -184,10 +185,11 @@ let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+nmap <localleader>ue :UltiSnipsEdit<cr>
 "}}}
 "{{{gundo
 Plug 'sjl/gundo.vim'
-map <localleader>g :GundoToggle<CR>
+map <leader>gg :GundoToggle<CR>
 "}}}
 Plug 'tpope/vim-fugitive'
 Plug 'godlygeek/tabular'
@@ -204,8 +206,12 @@ Plug 'ternjs/tern_for_vim'
 let g:tern_show_argument_hints = 'on_hold'
 let g:tern_map_keys = 1
 noremap <leader>tr :TernRename<CR>
-noremap <leader>ttr :TernRefs<CR>
-noremap <leader>td :TernDef<CR>
+noremap <leader>tf :TernRefs<CR>
+noremap <leader>tdd :TernDef<CR>
+noremap <leader>tdp :TernDefPreview<CR>
+noremap <leader>tds :TernDefSplit<CR>
+noremap <leader>tdt :TernDefTab<CR>
+
 Plug 'Valloric/YouCompleteMe'
 "let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 "let g:ycm_key_list_select_completion=[]
@@ -291,6 +297,7 @@ Plug 'gcmt/taboo.vim'
 Plug 'dkprice/vim-easygrep'
 Plug 'lervag/vimtex'
 nmap <leader>tt :TabooRename 
+
 
 let g:jsx_ext_required = 0
 "let g:jsx_pragma_required = 1
@@ -381,6 +388,13 @@ augroup END
 "}}}
 
 "}}}
+"{{{latex
+augroup filetype_tex
+    autocmd!
+    autocmd FileType tex nnoremap <F9> :execute "!pdflatex " .  expand("%") . " && evince " .  expand("%:r") . ".pdf &" <CR>
+    autocmd FileType tex nnoremap <F10> :execute "!latexmk -pvc " .  expand("%") . " -pdf &" <CR>
+augroup END
+"}}}
 "{{{handy shortcuts
 "edit file{{{
 nmap <leader>ev :tabedit $MYVIMRC<cr>'tzo
@@ -424,7 +438,15 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
+nmap <localleader>os :OpenSession default<cr>
+nmap <localleader>ws :SaveSession default<cr>
 "}}}
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'editorconfig/editorconfig-vim'
+
+Plug 'maxbrunsfeld/vim-yankstack'
+nmap Y y$
+let g:yankstack_yank_keys = ['y', 'd']
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
 call plug#end()
