@@ -15,4 +15,4 @@ if [[ -e "$VIMRC" ]]
 then
   rm $VIMRC
 fi
-ln $ROOT/.vimrc -s $VIMRC
+ln -s $ROOT/.vimrc $VIMRC
