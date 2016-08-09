@@ -180,8 +180,8 @@ Plug 'Raimondi/delimitMate'
 Plug 'derekwyatt/vim-scala'
 "{{{ultisnips
 Plug 'sirver/ultisnips'
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsExpandTrigger="<C-e>"
+let g:UltiSnipsJumpForwardTrigger="<C-e>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
