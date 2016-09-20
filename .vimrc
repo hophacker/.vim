@@ -58,9 +58,9 @@ endtry
 "}}}
 " Return to last edit position when opening files{{{
 autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal! g`\"" |
+      \ endif
 "}}}
 "{{{mouse
 if has('mouse')
@@ -69,20 +69,20 @@ endif
 "}}}
 "{{{color scheme
 try
-    colorscheme desert
+  colorscheme desert
 catch
 endtry
 if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
+  set guioptions-=T
+  set guioptions-=e
+  set t_Co=256
+  set guitablabel=%M\ %t
 endif
 "Plugin 'altercation/vim-colors-solarized' " color scheme
 "if has('gui_running')
-    "set background=light
+"set background=light
 "else
-    "set background=dark
+"set background=dark
 "endif
 "colorscheme solarized
 "}}}
@@ -116,11 +116,11 @@ map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove 
 map <leader>t<leader> :tabnext 
-    "Let 'tl' toggle between this and the last accessed tab
+"Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
 nmap <Leader>tt :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
-    "Opens a new tab with the current buffer's path
+"Opens a new tab with the current buffer's path
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 "}}}
 nnoremap <leader>/ :nohlsearch<cr>
@@ -242,15 +242,15 @@ map <F6> :NERDTreeTabsToggle<CR>
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
 augroup filetype_ruby
-    autocmd!
-    autocmd FileType ruby set sw=2
-    autocmd FileType ruby set ts=2
-    autocmd FileType ruby nnoremap <F9> :execute "!ruby ./" .  expand("%") <CR>
-    autocmd FileType ruby setlocal statusline=%f-%y-[%l]/[%L]
+  autocmd!
+  autocmd FileType ruby set sw=2
+  autocmd FileType ruby set ts=2
+  autocmd FileType ruby nnoremap <F9> :execute "!ruby ./" .  expand("%") <CR>
+  autocmd FileType ruby setlocal statusline=%f-%y-[%l]/[%L]
 augroup END
 augroup filetype_eruby
-    autocmd!
-    autocmd FileType eruby set foldmethod=indent
+  autocmd!
+  autocmd FileType eruby set foldmethod=indent
 augroup END
 "}}}
 source ~/.vim/python.vim
@@ -261,8 +261,8 @@ Plug 'vim-perl/vim-perl'
 Plug 'vim-scripts/awk.vim'
 Plug 'vim-scripts/bash-support.vim'
 augroup filetype_perl
-    autocmd!
-    autocmd FileType perl noremap <F10> :!perl % <cr>
+  autocmd!
+  autocmd FileType perl noremap <F10> :!perl % <cr>
 augroup END
 nnoremap <localleader>sh :sh<cr>
 let g:BASH_AuthorName   = 'Jie Feng'
@@ -285,11 +285,11 @@ let g:instant_markdown_slow = 0
 let g:instant_markdown_autostart = 1
 "}}}
 augroup filetype_markdown
-    autocmd!
-    autocmd FileType mkd setlocal spell
-    autocmd FileType mkd setlocal sw=2 ts=2
-    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-    let g:vim_markdown_initial_foldlevel=1
+  autocmd!
+  autocmd FileType mkd setlocal spell
+  autocmd FileType mkd setlocal sw=2 ts=2
+  autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+  let g:vim_markdown_initial_foldlevel=1
 augroup END
 "}}}
 Plug 'mxw/vim-jsx'
@@ -313,9 +313,9 @@ autocmd FileType css noremap <buffer> <localleader>bb :call CSSBeautify()<cr>
 Plug 'tpope/vim-git'
 Plug 'vim-support'
 augroup filetype_vimscript
-    autocmd!
-    autocmd FileType vim setlocal foldmethod=marker
-    autocmd FileType vim let g:foldlevel=1
+  autocmd!
+  autocmd FileType vim setlocal foldmethod=marker
+  autocmd FileType vim let g:foldlevel=1
 augroup END 
 "}}}
 "{{{ctrlp
@@ -327,18 +327,10 @@ nnoremap  <leader>b :CtrlPBuffer<cr>
 nnoremap  <leader>m :CtrlPMRUFiles<cr>
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll|cache)$'
-  \ }
+      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+      \ 'file': '\v\.(exe|so|dll|cache)$'
+      \ }
 "}}}
-" run and compile {{{
-" nnoremap <F9> :SCCompile<cr>
-"nnorema:C_CplusLFlags          = '-Wall -g -O0'         " C++ compiler flags:
-"link   , don't optimize
-" nnoremap <F10> :SCCompileRun<cr>
-nnoremap <localleader>run :execute "!%"<CR>
-nnoremap <F12> :execute "!./" .  expand("%:r") . " < in"<cr>
-" }}}
 "plugins{{{
 "highlight errors {{{
 "nnoremap <leader>w :match Error /\v +$/<cr>
@@ -368,7 +360,7 @@ onoremap b /return<cr>
 onoremap in( :<C-u>normal! f(vi(<cr>
 onoremap il( :<C-u>normal! F)vi(<cr>
 onoremap ie :<C-u>execute "normal! 
-            \/[a-zA-Z0-9._]\\+@[a-zA-Z0-9._]\\+\\.[a-zA-Z]\\{2,3}\rv/@\rE"<cr>
+      \/[a-zA-Z0-9._]\\+@[a-zA-Z0-9._]\\+\\.[a-zA-Z]\\{2,3}\rv/@\rE"<cr>
 "}}}
 "open window-buffer mappings {{{
 nnoremap <localleader>pb :execute "rightbelow vsplit  " . bufname("#")  <cr>
@@ -381,19 +373,19 @@ nnoremap <leader>p :cprevious<cr>
 
 "text {{{
 augroup text
-    autocmd!
-    autocmd FileType text nnoremap <F7> :set ft=tex<cr>
-    autocmd FileType text onoremap <buffer> ih :<C-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
-    autocmd FileType text onoremap <buffer> ah :<C-u>execute "normal! ?^==\\+$\r:nohlsearch\rg_vk0"<cr>
+  autocmd!
+  autocmd FileType text nnoremap <F7> :set ft=tex<cr>
+  autocmd FileType text onoremap <buffer> ih :<C-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
+  autocmd FileType text onoremap <buffer> ah :<C-u>execute "normal! ?^==\\+$\r:nohlsearch\rg_vk0"<cr>
 augroup END
 "}}}
 
 "}}}
 "{{{latex
 augroup filetype_tex
-    autocmd!
-    autocmd FileType tex nnoremap <F9> :execute "!pdflatex " .  expand("%") . " && evince " .  expand("%:r") . ".pdf &" <CR>
-    autocmd FileType tex nnoremap <F10> :execute "!latexmk -pvc " .  expand("%") . " -pdf &" <CR>
+  autocmd!
+  autocmd FileType tex nnoremap <F9> :execute "!pdflatex " .  expand("%") . " && evince " .  expand("%:r") . ".pdf &" <CR>
+  autocmd FileType tex nnoremap <F10> :execute "!latexmk -pvc " .  expand("%") . " -pdf &" <CR>
 augroup END
 "}}}
 "{{{handy shortcuts
@@ -426,13 +418,13 @@ nnoremap <C-X><C-V> "+p
 "autocmd BufWritePost .vimrc :source ~/.vimrc
 "}}}
 "}}}
-" The Silver Searcher {{{
-Plug 'rking/ag.vim'
-let g:ag_working_path_mode='r'
-let g:ag_highlight=1
-nnoremap <leader>aw :Ag <C-R><C-W><CR>
-vnoremap <leader>as <esc>:Ag <C-R>*<CR>
-nnoremap <leader>ag :Ag<SPACE>
+" The ack {{{
+Plug 'mileszs/ack.vim'
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
 "}}}
 Plug 'xolox/vim-misc'
 "tab management {{{
