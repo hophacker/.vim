@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =4
 let g:netrw_dirhist_1='/home/jie/bitcoin/src'
 let g:netrw_dirhist_2='/Users/Jie/myriad/.vagrant'
 let g:netrw_dirhist_3='/home/hophacker/.vim'
+let g:netrw_dirhist_4='/root/setup'
