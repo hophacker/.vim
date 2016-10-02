@@ -171,7 +171,6 @@ Plug 'bling/vim-airline'
 "}}}
 Plug 'ervandew/supertab'
 Plug 'tomtom/tlib_vim' " This library provides some utility functions
-Plug 'klen/rope-vim'
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'marcweber/vim-addon-manager'
 Plug 'marcweber/vim-addon-mw-utils'
@@ -191,6 +190,7 @@ nmap <localleader>ue :UltiSnipsEdit<cr>
 Plug 'sjl/gundo.vim'
 map <leader>gg :GundoToggle<CR>
 "}}}
+"let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 Plug 'tpope/vim-fugitive'
 Plug 'godlygeek/tabular'
 "pathogen"{{{
