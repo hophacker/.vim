@@ -296,6 +296,7 @@ Plug 'mxw/vim-jsx'
 Plug 'gcmt/taboo.vim'
 Plug 'dkprice/vim-easygrep'
 Plug 'lervag/vimtex'
+Plug 'tpope/vim-abolish'
 nmap <leader>tt :TabooRename 
 inoremap <leader>cb 「」
 
