@@ -407,6 +407,7 @@ nnoremap <C-A> <esc>ggyG
 nnoremap <C-X><C-A> <esc>gg"+yG
 "copy text in visual mode
 vnoremap <C-C> "+yy
+vnoremap <C-X><C-X> "+d
 "paste text in insertion mode
 inoremap <C-X><C-V> <esc>"+pa
 "paste text in normal mode

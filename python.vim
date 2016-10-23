@@ -10,6 +10,7 @@ let g:pymode_run_bind = "<C-S-e>"
 
 " Override view python doc key shortcut to Ctrl-Shift-d
 let g:pymode_doc_bind = "<C-S-d>"
+let g:pymode_lint_ignore = "W0611"
 "}}}
 Plug 'nvie/vim-flake8'
 augroup filetype_python
