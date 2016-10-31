@@ -3,7 +3,6 @@ call plug#begin('~/.vim/plugged')
 source ~/.vim/functions.vim
 "settings{{{
 filetype plugin indent on
-filetype plugin indent on
 set relativenumber
 set autoread
 set number
@@ -193,14 +192,6 @@ map <leader>gg :GundoToggle<CR>
 "let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 Plug 'tpope/vim-fugitive'
 Plug 'godlygeek/tabular'
-"pathogen"{{{
-Plug 'tpope/vim-pathogen'
-set laststatus=2
-set nocp
-execute pathogen#infect()
-execute pathogen#helptags()
-"}}}
-"
 "{{{code completion, complete
 Plug 'ternjs/tern_for_vim'
 let g:tern_show_argument_hints = 'on_hold'
