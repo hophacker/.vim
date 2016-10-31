@@ -5,3 +5,4 @@ vimmaps
 node_modules/*
 *.swp
 sessions/
+autoload/plug.vim
