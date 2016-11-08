@@ -39,3 +39,25 @@ snippet Card "Default Expandable Card" b
 	</CardActions>
 </Card>
 endsnippet
+
+snippet redux "redux" b
+export const SET_${1/\w/\u$0/g} = 'SET_${1/\w/\u$0/g}'
+import {store} from 'redux/store'
+import {Map} from 'immutable'
+export default function (${1} = Map({}), action) {
+  // let {$1Id} = action
+  switch (action.type) {
+    case SET_${1/\w/\u$0/g}:
+      return action.$1
+    default:
+      return $1
+  }
+}
+
+export function set${1/\w+\s*/\u$0/} ($1) {
+  store.dispatch({
+    type: SET_${1/\w/\u$0/g},
+    $1
+  })
+}
+endsnippet
