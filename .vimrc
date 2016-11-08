@@ -2,6 +2,7 @@
 call plug#begin('~/.vim/plugged')
 source ~/.vim/functions.vim
 "settings{{{
+filetype plugin on
 filetype plugin indent on
 set relativenumber
 set autoread
@@ -90,7 +91,6 @@ let mapleader = "\\"
 let g:mapleader = "\\"
 nm <leader>cf m'gg=G`'
 nm <leader>lm :marks<cr>
-nm <leader>P :InstantMarkdownPreview<cr>
 nm <silent><Leader><C-]> <C-w><C-]><C-w>T
 nmap <leader>w :w!<cr>
 nmap <leader>tf <c-w>gf
@@ -273,7 +273,6 @@ Plug 'plasticboy/vim-markdown'
 "Plugin 'greyblake/vim-preview'
 Plug 'suan/vim-instant-markdown' "{{{
 let g:instant_markdown_slow = 0
-let g:instant_markdown_autostart = 1
 "}}}
 augroup filetype_markdown
   autocmd!
