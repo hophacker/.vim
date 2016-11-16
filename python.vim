@@ -13,6 +13,8 @@ let g:pymode_doc_bind = "<C-S-d>"
 let g:pymode_lint_ignore = "W0611"
 "}}}
 Plug 'nvie/vim-flake8'
+let g:syntastic_python_pylint_post_args="--max-line-length=120"
+
 augroup filetype_python
     autocmd!
     "autocmd FileType python set omnifunc=pythoncomplete#Complete

@@ -205,14 +205,14 @@ noremap <leader>tdt :TernDefTab<CR>
 
 Plug 'Valloric/YouCompleteMe'
 "let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-"let g:ycm_key_list_select_completion=[]
-"let g:ycm_key_list_previous_completion=[]
-"let g:ycm_add_preview_to_completeopt=0
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+let g:ycm_add_preview_to_completeopt=0
 "let g:ycm_confirm_extra_conf=0
 "let g:ycm_server_use_vim_stdout = 1 
 "let g:ycm_server_log_level = 'debug'
-"let g:ycm_path_to_python_interpreter = '/usr/bin/python'
-"set completeopt-=preview
+let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+set completeopt-=preview
 "}}}
 "{{{snipmate snippets
 "Plugin 'garbas/vim-snipmate'
@@ -311,6 +311,7 @@ augroup END
 "}}}
 "{{{ctrlp
 Plug 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
