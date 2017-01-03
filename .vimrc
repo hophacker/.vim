@@ -26,12 +26,6 @@ nnoremap Q <nop>
 set lbr 
 set tw=500 
 "}}}"
-"{{{tab indent
-set expandtab
-set smarttab
-set autoindent
-set smartindent
-"}}}
 "{{{search and case
 set hlsearch incsearch
 set ignorecase
@@ -437,6 +431,13 @@ let g:yankstack_yank_keys = ['y', 'd']
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
 call plug#end()
+"{{{tab indent
+set expandtab
 set tabstop=2
-set softtabstop=0 noexpandtab
+set smarttab
+set autoindent
+set smartindent
 set shiftwidth=2
+set list
+set listchars=tab:>-
+"}}}
