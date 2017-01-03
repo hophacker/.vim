@@ -176,6 +176,7 @@ Plug 'marcweber/vim-addon-mw-utils'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Raimondi/delimitMate'
 Plug 'derekwyatt/vim-scala'
+Plug 'ktvoelker/sbt-vim'
 "{{{ultisnips
 Plug 'sirver/ultisnips'
 let g:UltiSnipsExpandTrigger="<C-e>"
@@ -436,3 +437,6 @@ let g:yankstack_yank_keys = ['y', 'd']
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
 call plug#end()
+set tabstop=2
+set softtabstop=0 noexpandtab
+set shiftwidth=2
