@@ -6,3 +6,4 @@ node_modules/*
 *.swp
 sessions/
 autoload/plug.vim
+init.vim
