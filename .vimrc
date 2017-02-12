@@ -441,3 +441,4 @@ set shiftwidth=2
 set list
 set listchars=tab:>-
 "}}}
+autocmd FileType python set colorcolumn=120
